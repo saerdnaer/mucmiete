@@ -1,0 +1,9 @@
+#six>=1.8
+pytz
+django>=1.8
+django-extensions>=1.4.7
+django-recaptcha
+django_admin_bootstrapped>=2.4
+#djangorestframework>=3.1
+#django-cors-headers
+#unicodecsv
