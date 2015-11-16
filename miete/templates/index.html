@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% load i18n %}
+{% block header_title %}Deine Miete{% endblock %}
+{% block content %}
+<form action="/" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Absenden" />
+</form>
+{% endblock %}
