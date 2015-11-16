@@ -15,7 +15,10 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-HAVE_ADMIN = True
+try:
+    from .preconfig import *
+except:
+    HAVE_ADMIN = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -29,20 +32,28 @@ ALLOWED_HOSTS = []
 
 if HAVE_ADMIN:
     ADMIN_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
     'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.admindocs',
     )
+    ADMIN_MIDDLEWARE = (
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    )
+    ADMIN_CONTEXTPROC = ['django.contrib.auth.context_processors.auth']
 else:
     ADMIN_APPS = ()
+    ADMIN_MIDDLEWARE = ()
+    ADMIN_CONTEXTPROC = []
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'captcha',
 )+ADMIN_APPS+(
     'miete',
 )
@@ -51,8 +62,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+)+ADMIN_MIDDLEWARE+(
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -69,7 +79,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+             ]+ADMIN_CONTEXTPROC+[
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -101,3 +111,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# addon packages
+
+# No Captcha reCaptcha
+NOCAPTCHA = True

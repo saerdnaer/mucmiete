@@ -22,7 +22,8 @@ class MieteAdmin(admin.ModelAdmin):
     search_fields = ('plz','stadtteil')
     fieldsets = (
         ('Pflicht', {'fields':('kaltmiete','groesse','plz','stadtteil','added')}),
-        ('Optional', {'fields':('bewohner','abschluss','erhoehung','vermieter')}),
+        ('Optional', {'fields':('bewohner','abschluss','erhoehung','vermieter','email')}),
+        ('Temporär', {'fields':('ipaddress','email')}),
     )
     list_display = ('kaltmiete','groesse','plz')
     list_filter = ('plz',)
