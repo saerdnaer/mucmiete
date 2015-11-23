@@ -53,6 +53,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_static_jquery',
+    'bootstrap3',
+    'fontawesome',
     'captcha',
 )+ADMIN_APPS+(
     'miete',
@@ -112,7 +115,44 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+#    '/var/www/static/',
+)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
 # addon packages
 
 # No Captcha reCaptcha
 NOCAPTCHA = True
+
+BOOTSTRAP3 = {
+    # The URL to the jQuery JavaScript file
+    'jquery_url': '/static_jquery/js/jquery.min.js',
+
+    # The Bootstrap base URL
+    'base_url': '/static/bootstrap/',
+}

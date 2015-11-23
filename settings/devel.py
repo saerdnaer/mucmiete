@@ -25,3 +25,5 @@ DATABASES = {
 # proxy_set_header X-Forwarded-Host $host;
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST= True
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static.deploy')

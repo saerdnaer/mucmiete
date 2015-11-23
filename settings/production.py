@@ -25,3 +25,5 @@ DATABASES = {
 HTTPS_SUPPORT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+#STATIC_ROOT = "/var/www/example.com/static/"

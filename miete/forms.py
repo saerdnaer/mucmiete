@@ -9,7 +9,7 @@ class MieteForm(ModelForm):
         model = Miete
         fields = ('kaltmiete','groesse','plz','stadtteil',
                 'bewohner','abschluss','erhoehung','vermieter',
-                'email','ipaddress')
+                'email')
         widgets = {'ipaddress': HiddenInput()}
         help_texts = {
             'kaltmiete':'Kaltmiete ist die Grundmiete ohne Nebenkosten wie Wasser,Heizung,Strom,Telefon etc.',
@@ -23,7 +23,3 @@ class MieteForm(ModelForm):
             'email':'Benachrichtung über Ergebnis der Umfrage',
         }
     captcha = ReCaptchaField(attrs={'theme' : 'clean'})
-    
-    def __init__(self, *args, **kwargs):
-        super(MieteForm, self).__init__(*args, **kwargs)
-        #self.fields['email'].required = False
