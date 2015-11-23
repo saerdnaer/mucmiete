@@ -4,6 +4,7 @@ from .forms import MieteForm
 
 # Create your views here.
 
+
 def index_view(request, **kwargs):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

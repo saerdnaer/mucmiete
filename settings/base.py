@@ -32,11 +32,11 @@ ALLOWED_HOSTS = []
 
 if HAVE_ADMIN:
     ADMIN_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django_admin_bootstrapped',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django_admin_bootstrapped',
+        'django.contrib.admin',
+        'django.contrib.admindocs',
     )
     ADMIN_MIDDLEWARE = (
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -57,7 +57,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'fontawesome',
     'captcha',
-)+ADMIN_APPS+(
+) + ADMIN_APPS + (
     'miete',
 )
 
@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-)+ADMIN_MIDDLEWARE+(
+) + ADMIN_MIDDLEWARE + (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -82,7 +82,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-             ]+ADMIN_CONTEXTPROC+[
+            ] + ADMIN_CONTEXTPROC + [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -97,8 +97,8 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 LANGUAGE_CODE = 'de-de'
 LANGUAGES = (
-	('en', 'English'),
-	('de', 'Deutsch'),
+    ('en', 'English'),
+    ('de', 'Deutsch'),
 )
 
 TIME_ZONE = 'Europe/Berlin'
@@ -117,7 +117,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-#    '/var/www/static/',
+    #    '/var/www/static/',
 )
 
 LOGGING = {
