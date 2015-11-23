@@ -102,23 +102,26 @@
 <p onmouseover="document.querySelector('#glossar').innerHTML = 'Die ungefähre Miete (Kaltmiete) Ihrer Wohnung. Kaltmiete (auch Nettomiete oder Grundmiete) bezieht sich im Sprachgebrauch in Deutschland auf den Teil der Miete, der allein die Raumnutzung abdeckt. Ein Teil der weiteren Kosten wird in der Nebenkostenabrechnung gesondert ausgewiesen. Dies könnte zum Beispiel sein: Müllabfuhr, Wasser (warm und kalt), Erdgas, Abwasser, Heizung. (Quelle: Wikipedia)'">
 Miete (in EUR):
   <input type=range min=0 max=3000 value=1500 id=fadereuro step=100 oninput="document.querySelector('#id_kaltmiete').value = document.querySelector('#fadereuro').value;">
-<input id="id_kaltmiete" min="0" name="kaltmiete" type="number"  
-oninput="document.querySelector('#fadereuro').value = document.querySelector('#id_kaltmiete').value;"/>
+<input id="id_kaltmiete" min="0" name="kaltmiete" type="number" class="required"
+oninput="document.querySelector('#fadereuro').value = document.querySelector('#id_kaltmiete').value;"
+value="{{form.kaltmiete.value|default_if_none:''}}"/>
 {{ form.kaltmiete.errors }}
 </p>
     
     
 <p onmouseover="document.querySelector('#glossar').innerHTML = 'Die ungefähre Größe Ihrer Wohnung. Bitte geben Sie hier die gesamte Größe der Wohnung und nicht nur ihren eigenen Wohnbereich an falls Sie in einer Wohngemeinschaft (WG) wohnen.'">
 Wohnfläche (in m2):<input type=range min=0 max=200 value=100 id=faderm2 step=5 oninput="document.querySelector('#id_groesse').value = document.querySelector('#faderm2').value;">
-<input id="id_groesse" name="groesse" step="0.01" type="number" oninput="document.querySelector('#faderm2').value = document.querySelector('#id_groesse').value;" /> 
+<input id="id_groesse" name="groesse" step="0.01" type="number"  class="required"
+oninput="document.querySelector('#faderm2').value = document.querySelector('#id_groesse').value;" value="{{form.groesse.value|default_if_none:''}}"/>
 {{ form.groesse.errors }}
 </p>
     
 <p>    
 Postleitzahl: 
 {{ form.plz.errors }}
-<input id="id_plz" min="0" name="plz" type="number" /> 
-  <datalist id="PLZ">
+<input id="id_plz" name="plz" list="plz" type="number" class="required"
+value="{{form.plz.value|default_if_none:''}}"/>
+<datalist id="plz">
 <option value="80331">
 <option value="80333">
 <option value="80335">
@@ -199,8 +202,9 @@ Postleitzahl:
 <p>
 Stadtteil: 
 {{ form.stadtteil.errors }}
-<input id="id_stadtteil" list="Stadtteil" name="Stadtteil">
-<datalist id="Stadtteil">
+<input id="id_stadtteil" type="text" list="stadtteil" name="stadtteil" class="required"
+value="{{form.stadtteil.value|default_if_none:''}}">
+<datalist id="stadtteil">
 <option value="Allach">
 <option value="Untermenzing">
 <option value="Altstadt">
@@ -250,22 +254,25 @@ Stadtteil:
 
 <p><label for="id_bewohner">Bewohner:</label> 
 {{ form.bewohner.errors }}
-<input id="id_bewohner" min="0" name="bewohner" type="number" /> 
+<input id="id_bewohner" min="0" name="bewohner" type="number"
+value="{{form.bewohner.value|default_if_none:''}}"/>
 <span class="helptext">Anzahl aller Bewohner in der Wohnung</span></p>
 
 <p><label for="id_abschluss">Jahr des Abschlusses des Mietvertrags:</label>
 {{ form.abschluss.errors }}
-<input id="id_abschluss" min="0" name="abschluss" type="number" /> 
+<input id="id_abschluss" min="0" name="abschluss" type="number" value="{{form.abschluss.value|default_if_none:''}}"/>
 <span class="helptext">Jahr des Abschlusses des Mietvertrags</span></p>
 
 <p><label for="id_erhoehung">Jahr der letzten Mieterhöhung:</label>
 {{ form.erhoehung.errors }}
-<input id="id_erhoehung" min="0" name="erhoehung" type="number" />
+<input id="id_erhoehung" min="0" name="erhoehung" type="number"
+value="{{form.erhoehung.value|default_if_none:''}}"/>
 <span class="helptext">Jahr der letzten Mieterhöhung</span></p>
 
 <p><label for="id_vermieter">Vermieter:</label>
 {{ form.vermieter.errors }}
-<select id="id_vermieter" name="vermieter">
+<select id="id_vermieter" name="vermieter"
+value="{{form.vermieter.value|default_if_none:''}}">
 <option value="" selected="selected">---------</option>
 <option value="NP">gemeinnützig</option>
 <option value="PR">privat</option>
@@ -273,9 +280,15 @@ Stadtteil:
 </select>
 <span class="helptext">Art des Vermieters</span></p>
 
-<p><label for="id_email">E-Mail für Benachrichtigung über Ergebnis:</label> <input id="id_email" maxlength="254" name="email" type="email" /> <span class="helptext">Benachrichtung über Ergebnis der Umfrage</span></p>
+<p><label for="id_email">E-Mail für Benachrichtigung über Ergebnis:</label>
+<input id="id_email" maxlength="254" name="email" type="email"
+value="{{form.email.value|default_if_none:''}}"/>
+<span class="helptext">Benachrichtung über Ergebnis der Umfrage</span></p>
 
+<p>
+{{ form.captcha.errors }}
 {{ form.captcha }}
+</p>
 
 <input type="submit" value="Absenden" />
 </p>

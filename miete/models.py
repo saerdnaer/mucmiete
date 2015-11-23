@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 
 class Miete(models.Model):
@@ -31,8 +31,6 @@ class Miete(models.Model):
         'Jahr der letzten Mieterhöhung', null=True, blank=True)
     vermieter = models.CharField(
         verbose_name='Vermieter', max_length=2, choices=VERMIETER_CHOICES, blank=True)
-    email = models.EmailField(
-        'E-Mail für Benachrichtigung über Ergebnis', blank=True)
     # hidden
     ipaddress = models.GenericIPAddressField(
         'IP Adresse', blank=True, null=True)
@@ -40,3 +38,8 @@ class Miete(models.Model):
     def __str__(self):
         return "%i für %f in %i %s" % (self.kaltmiete, self.groesse, self.plz, self.stadtteil)
     __unicode__ = __str__  # python2
+
+
+class Email(models.Model):
+    email = models.EmailField(
+        'E-Mail für Benachrichtigung über Ergebnis', unique=True)

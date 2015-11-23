@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
 from . import models
 from django.contrib import admin
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib.auth.models import Group, User
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.sites import AdminSite
 
 
@@ -26,11 +26,13 @@ class MieteAdmin(admin.ModelAdmin):
         ('Pflicht', {
          'fields': ('kaltmiete', 'groesse', 'plz', 'stadtteil', 'added')}),
         ('Optional', {
-         'fields': ('bewohner', 'abschluss', 'erhoehung', 'vermieter', 'email')}),
-        ('Temporär', {'fields': ('ipaddress', 'email')}),
+         'fields': ('bewohner', 'abschluss', 'erhoehung', 'vermieter')}),
+        ('Temporär', {'fields': ('ipaddress',)}),
     )
     list_display = ('kaltmiete', 'groesse', 'plz')
     list_filter = ('plz',)
     date_hierarchy = 'added'
 
 main.register(models.Miete, MieteAdmin)
+
+main.register(models.Email)
