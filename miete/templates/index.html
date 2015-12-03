@@ -112,80 +112,9 @@ Deine Miete
                             Postleitzahl: {{ form.plz.errors }}
                             <input id="id_plz" name="plz" list="plz" type="number" class="required" value="{{form.plz.value|default_if_none:''}}" />
                             <datalist id="plz">
-                                <option value="80331">
-                                <option value="80333">
-                                <option value="80335">
-                                <option value="80336">
-                                <option value="80337">
-                                <option value="80339">
-                                <option value="80469">
-                                <option value="80538">
-                                <option value="80539">
-                                <option value="80634">
-                                <option value="80636">
-                                <option value="80637">
-                                <option value="80638">
-                                <option value="80639">
-                                <option value="80686">
-                                <option value="80687">
-                                <option value="80689">
-                                <option value="80796">
-                                <option value="80797">
-                                <option value="80798">
-                                <option value="80799">
-                                <option value="80801">
-                                <option value="80802">
-                                <option value="80803">
-                                <option value="80804">
-                                <option value="80805">
-                                <option value="80807">
-                                <option value="80809">
-                                <option value="80933">
-                                <option value="80935">
-                                <option value="80937">
-                                <option value="80939">
-                                <option value="80992">
-                                <option value="80993">
-                                <option value="80995">
-                                <option value="80997">
-                                <option value="80999">
-                                <option value="81241">
-                                <option value="81243">
-                                <option value="81245">
-                                <option value="81247">
-                                <option value="81249">
-                                <option value="81369">
-                                <option value="81371">
-                                <option value="81373">
-                                <option value="81375">
-                                <option value="81377">
-                                <option value="81379">
-                                <option value="81475">
-                                <option value="81476">
-                                <option value="81477">
-                                <option value="81479">
-                                <option value="81539">
-                                <option value="81541">
-                                <option value="81543">
-                                <option value="81545">
-                                <option value="81547">
-                                <option value="81549">
-                                <option value="81667">
-                                <option value="81669">
-                                <option value="81671">
-                                <option value="81673">
-                                <option value="81675">
-                                <option value="81677">
-                                <option value="81679">
-                                <option value="81735">
-                                <option value="81737">
-                                <option value="81739">
-                                <option value="81825">
-                                <option value="81827">
-                                <option value="81829">
-                                <option value="81925">
-                                <option value="81927">
-                                <option value="81929">
+                                {% for plz in postleitzahl %}
+                                    <option value="{{ plz }}">
+                                {% endfor %}
                             </datalist>
                         </p>
 
@@ -193,49 +122,9 @@ Deine Miete
                             Stadtteil: {{ form.stadtteil.errors }}
                             <input id="id_stadtteil" type="text" list="stadtteil" name="stadtteil" class="required" value="{{form.stadtteil.value|default_if_none:''}}">
                             <datalist id="stadtteil">
-                                <option value="Allach">
-                                <option value="Untermenzing">
-                                <option value="Altstadt">
-                                <option value="Lehel">
-                                <option value="Au">
-                                <option value="Haidhausen">
-                                <option value="Aubing">
-                                <option value="Lochhausen">
-                                <option value="Langwied">
-                                <option value="Berg am Laim">
-                                <option value="Bogenhausen">
-                                <option value="Feldmoching">
-                                <option value="Hasenbergl">
-                                <option value="Hadern">
-                                <option value="Laim">
-                                <option value="Ludwigsvorstadt">
-                                <option value="Isarvorstadt">
-                                <option value="Maxvorstadt">
-                                <option value="Milbertshofen">
-                                <option value="Am Hart">
-                                <option value="Moosach">
-                                <option value="Neuhausen">
-                                <option value="Nymphenburg">
-                                <option value="Obergiesing">
-                                <option value="Pasing">
-                                <option value="Obermenzing">
-                                <option value="Ramersdorf">
-                                <option value="Perlach">
-                                <option value="Schwabing">
-                                <option value="Freimann">
-                                <option value="Schwabing-West">
-                                <option value="Schwanthalerhöhe">
-                                <option value="Sendling">
-                                <option value="Sendling-Westpark">
-                                <option value="Thalkirchen">
-                                <option value="Obersendling">
-                                <option value="Fürstenried">
-                                <option value="Forstenried">
-                                <option value="Solln">
-                                <option value="Trudering">
-                                <option value="Riem">
-                                <option value="Untergiesing">
-                                <option value="Harlaching">
+                                {% for stadtteil in stadtteile %}
+                                    <option value="{{ stadtteil }}">
+                                {% endfor %}
                             </datalist>
                         </p>
                         <p>
