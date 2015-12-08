@@ -24,4 +24,4 @@ class MieteForm(ModelForm):
         }
     email = EmailField(required=False, label='E-Mail',
                        help_text='Trage deine E-Mailadresse hier ein, wenn Du über das Ergebnis der Umfrage benachrichtigt werden willst')
-    # captcha = ReCaptchaField(attrs={'theme': 'clean'})
+    captcha = ReCaptchaField(attrs={'theme': 'clean'})
