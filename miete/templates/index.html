@@ -1,758 +1,492 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% block header_title %}Deine Miete{% endblock %}
+
+{% block header_title %}
+Deine Miete
+{% endblock %}
+
 {% block extra_head %}
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'js/jquery.scrollTo.js' %}"></script>
-    <script src="{% static 'js/wow.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/jquery.scrollTo.js' %}"></script>
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
 {% endblock %}
 
-{% block body-tag %}<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-	<!-- Preloader -->
-	<div id="preloader">
-	  <div id="load"></div>
-	</div>
-{% endblock %}
-
-{% block navigation-tag %}<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">{% endblock %}
-{% block navigation %}
+{% block body-tag %}
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="load"></div>
+    </div>
+    {% endblock %}
+    
+    {% block navigation-tag %}
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    {% endblock %}
+    
+    {% block navigation %}
         <div class="container">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                <h1>Deinemiete.de</h1>
+                    <h1>Deine Miete</h1>
                 </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#intro">Home</a></li>
-        <li><a href="#about">Umfrage</a></li>
-		<li><a href="#service">Über uns</a></li>
-		<li><a href="#contact">glossar</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kontakt<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-          </ul>
-        </li>
-      </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#intro">Home</a></li>
+                    <li><a href="#about">Umfrage</a></li>
+                    <li><a href="#service">Über uns</a></li>
+                    <li><a href="#contact">glossar</a></li>
+                    <!--li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kontakt<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Example menu</a></li>
+                            <li><a href="#">Example menu</a></li>
+                            <li><a href="#">Example menu</a></li>
+                        </ul>
+                    </li-->
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-{% endblock %}
+    {% endblock %}
+        
+    {% block content %}
+        <!-- Section: intro -->
+        <section id="intro" class="intro">
 
-{% block content %}
-	<!-- Section: intro -->
-    <section id="intro" class="intro">
-	
-		<div class="slogan">
-		  <h2>MÜNCHEN, Deine Miete!</h2>
-		  <h2>&nbsp;</h2>
-		  <h4>DIE MIETUMFRAGE FÜR MÜNCHEN</h4>
-		</div>
-		<div class="page-scroll">
-			<a href="#service" class="btn btn-circle">
-				<i class="fa fa-angle-double-down animated"></i>
-			</a>
-		</div>
-    </section>
-	<!-- /Section: intro -->
-
-	<!-- Section: about -->
-    <section id="about" class="home-section text-center">
-		<div class="heading-about">
-			<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading"><h2>Umfrage</h2><em class="fa fa-2x fa-angle-down"></em></div>
-					</div>
-				</div>
-			</div>
-			</div>
-		</div>
-	
-    <!--form-->
- 
-  
-
-<form action="/" method="post">{% csrf_token %}
-
-
-    
-        <div class="row">
-  
-        <div class="boxed-grey">
-
-    
-<p onmouseover="document.querySelector('#glossar').innerHTML = 'Die ungefähre Miete (Kaltmiete) Ihrer Wohnung. Kaltmiete (auch Nettomiete oder Grundmiete) bezieht sich im Sprachgebrauch in Deutschland auf den Teil der Miete, der allein die Raumnutzung abdeckt. Ein Teil der weiteren Kosten wird in der Nebenkostenabrechnung gesondert ausgewiesen. Dies könnte zum Beispiel sein: Müllabfuhr, Wasser (warm und kalt), Erdgas, Abwasser, Heizung. (Quelle: Wikipedia)'">
-Miete (in EUR):
-  <input type=range min=0 max=3000 value=1500 id=fadereuro step=100 oninput="document.querySelector('#id_kaltmiete').value = document.querySelector('#fadereuro').value;">
-<input id="id_kaltmiete" min="0" name="kaltmiete" type="number" class="required"
-oninput="document.querySelector('#fadereuro').value = document.querySelector('#id_kaltmiete').value;"
-value="{{form.kaltmiete.value|default_if_none:''}}"/>
-{{ form.kaltmiete.errors }}
-</p>
-    
-    
-<p onmouseover="document.querySelector('#glossar').innerHTML = 'Die ungefähre Größe Ihrer Wohnung. Bitte geben Sie hier die gesamte Größe der Wohnung und nicht nur ihren eigenen Wohnbereich an falls Sie in einer Wohngemeinschaft (WG) wohnen.'">
-Wohnfläche (in m2):<input type=range min=0 max=200 value=100 id=faderm2 step=5 oninput="document.querySelector('#id_groesse').value = document.querySelector('#faderm2').value;">
-<input id="id_groesse" name="groesse" step="0.01" type="number"  class="required"
-oninput="document.querySelector('#faderm2').value = document.querySelector('#id_groesse').value;" value="{{form.groesse.value|default_if_none:''}}"/>
-{{ form.groesse.errors }}
-</p>
-    
-<p>    
-Postleitzahl: 
-{{ form.plz.errors }}
-<input id="id_plz" name="plz" list="plz" type="number" class="required"
-value="{{form.plz.value|default_if_none:''}}"/>
-<datalist id="plz">
-<option value="80331">
-<option value="80333">
-<option value="80335">
-<option value="80336">
-<option value="80337">
-<option value="80339">
-<option value="80469">
-<option value="80538">
-<option value="80539">
-<option value="80634">
-<option value="80636">
-<option value="80637">
-<option value="80638">
-<option value="80639">
-<option value="80686">
-<option value="80687">
-<option value="80689">
-<option value="80796">
-<option value="80797">
-<option value="80798">
-<option value="80799">
-<option value="80801">
-<option value="80802">
-<option value="80803">
-<option value="80804">
-<option value="80805">
-<option value="80807">
-<option value="80809">
-<option value="80933">
-<option value="80935">
-<option value="80937">
-<option value="80939">
-<option value="80992">
-<option value="80993">
-<option value="80995">
-<option value="80997">
-<option value="80999">
-<option value="81241">
-<option value="81243">
-<option value="81245">
-<option value="81247">
-<option value="81249">
-<option value="81369">
-<option value="81371">
-<option value="81373">
-<option value="81375">
-<option value="81377">
-<option value="81379">
-<option value="81475">
-<option value="81476">
-<option value="81477">
-<option value="81479">
-<option value="81539">
-<option value="81541">
-<option value="81543">
-<option value="81545">
-<option value="81547">
-<option value="81549">
-<option value="81667">
-<option value="81669">
-<option value="81671">
-<option value="81673">
-<option value="81675">
-<option value="81677">
-<option value="81679">
-<option value="81735">
-<option value="81737">
-<option value="81739">
-<option value="81825">
-<option value="81827">
-<option value="81829">
-<option value="81925">
-<option value="81927">
-<option value="81929">
-</datalist>
-</p>
-    
-<p>
-Stadtteil: 
-{{ form.stadtteil.errors }}
-<input id="id_stadtteil" type="text" list="stadtteil" name="stadtteil" class="required"
-value="{{form.stadtteil.value|default_if_none:''}}">
-<datalist id="stadtteil">
-<option value="Allach">
-<option value="Untermenzing">
-<option value="Altstadt">
-<option value="Lehel">
-<option value="Au">
-<option value="Haidhausen">
-<option value="Aubing">
-<option value="Lochhausen">
-<option value="Langwied">
-<option value="Berg am Laim">
-<option value="Bogenhausen">
-<option value="Feldmoching">
-<option value="Hasenbergl">
-<option value="Hadern">
-<option value="Laim">
-<option value="Ludwigsvorstadt">
-<option value="Isarvorstadt">
-<option value="Maxvorstadt">
-<option value="Milbertshofen">
-<option value="Am Hart">
-<option value="Moosach">
-<option value="Neuhausen">
-<option value="Nymphenburg">
-<option value="Obergiesing">
-<option value="Pasing">
-<option value="Obermenzing">
-<option value="Ramersdorf">
-<option value="Perlach">
-<option value="Schwabing">
-<option value="Freimann">
-<option value="Schwabing-West">
-<option value="Schwanthalerhöhe">
-<option value="Sendling">
-<option value="Sendling-Westpark">
-<option value="Thalkirchen">
-<option value="Obersendling">
-<option value="Fürstenried">
-<option value="Forstenried">
-<option value="Solln">
-<option value="Trudering">
-<option value="Riem">
-<option value="Untergiesing">
-<option value="Harlaching">
-</datalist>
-</p>     
-<p>
-
-<p><label for="id_bewohner">Bewohner:</label> 
-{{ form.bewohner.errors }}
-<input id="id_bewohner" min="0" name="bewohner" type="number"
-value="{{form.bewohner.value|default_if_none:''}}"/>
-<span class="helptext">Anzahl aller Bewohner in der Wohnung</span></p>
-
-<p><label for="id_abschluss">Jahr des Abschlusses des Mietvertrags:</label>
-{{ form.abschluss.errors }}
-<input id="id_abschluss" min="0" name="abschluss" type="number" value="{{form.abschluss.value|default_if_none:''}}"/>
-<span class="helptext">Jahr des Abschlusses des Mietvertrags</span></p>
-
-<p><label for="id_erhoehung">Jahr der letzten Mieterhöhung:</label>
-{{ form.erhoehung.errors }}
-<input id="id_erhoehung" min="0" name="erhoehung" type="number"
-value="{{form.erhoehung.value|default_if_none:''}}"/>
-<span class="helptext">Jahr der letzten Mieterhöhung</span></p>
-
-<p><label for="id_vermieter">Vermieter:</label>
-{{ form.vermieter.errors }}
-<select id="id_vermieter" name="vermieter"
-value="{{form.vermieter.value|default_if_none:''}}">
-<option value="" selected="selected">---------</option>
-<option value="NP">gemeinnützig</option>
-<option value="PR">privat</option>
-<option value="CO">Unternehmen</option>
-</select>
-<span class="helptext">Art des Vermieters</span></p>
-
-<p><label for="id_email">E-Mail für Benachrichtigung über Ergebnis:</label>
-<input id="id_email" maxlength="254" name="email" type="email"
-value="{{form.email.value|default_if_none:''}}"/>
-<span class="helptext">Benachrichtung über Ergebnis der Umfrage</span></p>
-
-<p>
-{{ form.captcha.errors }}
-{{ form.captcha }}
-</p>
-
-<input type="submit" value="Absenden" />
-</p>
-
-</div>
-
-</div>
-
-</form>
-
-    <!--form ende-->
-    
-    
-	</section>
-	<!-- /Section: about -->
-	
-
-	<!-- Section: services -->
-    <section id="service" class="home-section text-center bg-gray">
-		
-		<div class="heading-about">
-			<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading">
-					<h2>ABOUT US</h2>
-					<i class="fa fa-2x fa-angle-down"></i>
-
-					</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="container">
-		<div class="row">
-			<div class="col-lg-2 col-lg-offset-5">
-				<hr class="marginbot-50">
-			</div>
-		</div>
-        <div class="row">
-            <div class="col-sm-3 col-md-3">
-				<div class="wow fadeInLeft" data-wow-delay="0.2s">
-                <div class="service-box">
-					<div class="service-icon">
-						<img src="{% static 'img/logo.png' %}" alt="okl" width="220" height"60" />
-					</div>
-					<div class="service-desc">
-						<h5>Code for München</h5>
-						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-					</div>
-                </div>
-				</div>
+            <div class="slogan">
+                <h2>MÜNCHEN, Deine Miete!</h2>
+                <h2>&nbsp;</h2>
+                <h4>DIE MIETUMFRAGE FÜR MÜNCHEN</h4>
             </div>
-			<div class="col-sm-3 col-md-3">
-				<div class="wow fadeInUp" data-wow-delay="0.2s">
-                <div class="service-box">
-					<div class="service-icon">
-						<img src="{% static 'img/mmtz_689x140px_250dpi-26c97d64.jpg' %}" alt="" width="220" height="60" />
-					</div>
-					<div class="service-desc">
-						<h5>Merkur.de &amp; tz.de</h5>
-						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-					</div>
+        </section>
+        <!-- /Section: intro -->
+
+        <!-- Section: about -->
+        <section id="about" class="home-section text-center">
+            <div class="heading-about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="wow bounceInDown" data-wow-delay="0.4s">
+                                <div class="section-heading">
+                                    <h2>Umfrage</h2>
+                                    <em class="fa fa-2x fa-angle-down"></em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-				</div>
             </div>
-			<div class="col-sm-3 col-md-3">
-				<div class="wow fadeInUp" data-wow-delay="0.2s">
-                
 
-                <div class="service-box">
-					<div class="service-icon"> <a href="http://okfn.de/"><img src="{% static 'img/okf.png' %}" alt="open knowledge foundation deutschland" width="220" height="60" /></a>
-					</div>
-				  <div class="service-desc">
-					<h5>Open Knowledge Foundation</h5>
-					  <p>Die Open Knowledge Foundation Deutschland ist ein gemeinnütziger Verein, der sich für offenes Wissen, offene Daten, Transparenz und Beteiligung einsetzt. </p>
-					</div>
+            <!--form-->
+            <form action="/" method="post">{% csrf_token %}
+                <div class="row">
+                    <div class="boxed-grey">
+                        <p onmouseover="document.querySelector('#glossar').innerHTML = 'Die ungefähre Miete (Kaltmiete) Ihrer Wohnung. Kaltmiete (auch Nettomiete oder Grundmiete) bezieht sich im Sprachgebrauch in Deutschland auf den Teil der Miete, der allein die Raumnutzung abdeckt. Ein Teil der weiteren Kosten wird in der Nebenkostenabrechnung gesondert ausgewiesen. Dies könnte zum Beispiel sein: Müllabfuhr, Wasser (warm und kalt), Erdgas, Abwasser, Heizung. (Quelle: Wikipedia)'">
+                            Miete (in EUR):
+                            <input type=range min=0 max=3000 value=1500 id=fadereuro step=100 oninput="document.querySelector('#id_kaltmiete').value = document.querySelector('#fadereuro').value;">
+                            <input id="id_kaltmiete" min="0" name="kaltmiete" type="number" class="required" oninput="document.querySelector('#fadereuro').value = document.querySelector('#id_kaltmiete').value;" value="{{form.kaltmiete.value|default_if_none:''}}" /> {{ form.kaltmiete.errors }}
+                        </p>
+
+                        <p onmouseover="document.querySelector('#glossar').innerHTML = 'Die ungefähre Größe Ihrer Wohnung. Bitte geben Sie hier die gesamte Größe der Wohnung und nicht nur ihren eigenen Wohnbereich an falls Sie in einer Wohngemeinschaft (WG) wohnen.'">
+                            Wohnfläche (in m2):
+                            <input type=range min=0 max=200 value=100 id=faderm2 step=5 oninput="document.querySelector('#id_groesse').value = document.querySelector('#faderm2').value;">
+                            <input id="id_groesse" name="groesse" step="0.01" type="number" class="required" oninput="document.querySelector('#faderm2').value = document.querySelector('#id_groesse').value;" value="{{form.groesse.value|default_if_none:''}}" /> {{ form.groesse.errors }}
+                        </p>
+
+                        <p>
+                            Postleitzahl: {{ form.plz.errors }}
+                            <input id="id_plz" name="plz" list="plz" type="number" class="required" value="{{form.plz.value|default_if_none:''}}" />
+                            <datalist id="plz">
+                                {% for plz in postleitzahl %}
+                                    <option value="{{ plz }}">
+                                {% endfor %}
+                            </datalist>
+                        </p>
+
+                        <p>
+                            Stadtteil: {{ form.stadtteil.errors }}
+                            <input id="id_stadtteil" type="text" list="stadtteil" name="stadtteil" class="required" value="{{form.stadtteil.value|default_if_none:''}}">
+                            <datalist id="stadtteil">
+                                {% for stadtteil in stadtteile %}
+                                    <option value="{{ stadtteil }}">
+                                {% endfor %}
+                            </datalist>
+                        </p>
+                        <p>
+
+                            <p>
+                                <label for="id_bewohner">Bewohner:</label>
+                                {{ form.bewohner.errors }}
+                                <input id="id_bewohner" min="0" name="bewohner" type="number" value="{{form.bewohner.value|default_if_none:''}}" />
+                                <span class="helptext">Anzahl aller Bewohner in der Wohnung</span>
+                            </p>
+
+                            <p>
+                                <label for="id_abschluss">Jahr des Abschlusses des Mietvertrags:</label>
+                                {{ form.abschluss.errors }}
+                                <input id="id_abschluss" min="0" name="abschluss" type="number" value="{{form.abschluss.value|default_if_none:''}}" />
+                                <span class="helptext">Jahr des Abschlusses des Mietvertrags</span>
+                            </p>
+
+                            <p>
+                                <label for="id_erhoehung">Jahr der letzten Mieterhöhung:</label>
+                                {{ form.erhoehung.errors }}
+                                <input id="id_erhoehung" min="0" name="erhoehung" type="number" value="{{form.erhoehung.value|default_if_none:''}}" />
+                                <span class="helptext">Jahr der letzten Mieterhöhung</span>
+                            </p>
+
+                            <p>
+                                <label for="id_vermieter">Vermieter:</label>
+                                {{ form.vermieter.errors }}
+                                <select id="id_vermieter" name="vermieter" value="{{form.vermieter.value|default_if_none:''}}">
+                                <option value="" selected="selected">---------</option>
+                                <option value="NP">gemeinnützig</option>
+                                <option value="PR">privat</option>
+                                <option value="CO">Unternehmen</option>
+                                </select>
+                                <span class="helptext">Art des Vermieters</span>
+                            </p>
+
+                            <p>
+                                <label for="id_email">E-Mail für Benachrichtigung über Ergebnis:</label>
+                                <input id="id_email" maxlength="254" name="email" type="email" value="{{form.email.value|default_if_none:''}}" />
+                                <span class="helptext">Benachrichtung über Ergebnis der Umfrage</span>
+                            </p>
+
+                            <p>
+                                {{ form.captcha.errors }} {{ form.captcha }}
+                            </p>
+
+                            <input type="submit" value="Absenden" />
+                        </p>
+                    </div>
                 </div>
-				</div>
+            </form>
+            <!--form ende-->
+        </section>
+        <!-- /Section: about -->
+
+        <!-- Section: services -->
+        <section id="service" class="home-section text-center bg-gray">
+
+            <div class="heading-about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="wow bounceInDown" data-wow-delay="0.4s">
+                                <div class="section-heading">
+                                    <h2>ABOUT US</h2>
+                                    <i class="fa fa-2x fa-angle-down"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-			<div class="col-sm-3 col-md-3">
-				<div class="wow fadeInRight" data-wow-delay="0.2s">
-                <div class="service-box">
-					<div class="service-icon">
-						<img src="{% static 'img/icons/service-icon-4.png' %}" alt="" />
-					</div>
-					<div class="service-desc">
-						<h5>Cloud System</h5>
-						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-
-                        
-				</div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-5">
+                        <hr class="marginbot-50">
+                    </div>
                 </div>
-				</div>
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <img src="{% static 'img/logo-code-for-muenchen.svg' %}" alt="okl" width="220" height="60" />
+                                </div>
+                                <div class="service-desc">
+                                    <h5>Code for München</h5>
+                                    <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <img src="{% static 'img/mmtz_689x140px_250dpi-26c97d64.jpg' %}" alt="" width="220" height="60" />
+                                </div>
+                                <div class="service-desc">
+                                    <h5>Merkur.de &amp; tz.de</h5>
+                                    <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="service-box">
+                                <div class="service-icon">
+                                    <a href="http://okfn.de/">
+                                        <img src="{% static 'img/logo-okfde.svg' %}" alt="open knowledge foundation deutschland" width="220" />
+                                    </a>
+                                </div>
+                                <div class="service-desc">
+                                    <h5>Open Knowledge Foundation</h5>
+                                    <p>Die Open Knowledge Foundation Deutschland ist ein gemeinnütziger Verein, der sich für offenes Wissen, offene Daten, Transparenz und Beteiligung einsetzt. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>		
-		</div>
-	</section>
-	<!-- /Section: services -->
-	
+        </section>
+        <!-- /Section: services -->
+        <!-- Section: contact -->
+        <section id="contact" class="home-section text-center">
+            <div class="heading-contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="wow bounceInDown" data-wow-delay="0.4s">
+                                <div class="section-heading">
+                                    <h2>Get in touch</h2>
+                                    <i class="fa fa-2x fa-angle-down"></i>
 
-	
-
-	<!-- Section: contact -->
-    <section id="contact" class="home-section text-center">
-		<div class="heading-contact">
-			<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading">
-					<h2>Get in touch</h2>
-					<i class="fa fa-2x fa-angle-down"></i>
-
-					</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="container">
-
-		<div class="row">
-			<div class="col-lg-2 col-lg-offset-5">
-				<hr class="marginbot-50">
-			</div>
-		</div>
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="boxed-grey">
-                
-                
-                <div class='centerplease'>
-                  <h2>GLOSSAR</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-<br>
-<div>
-
-  <input type="checkbox" id="question1" name="q"  class="questions">
-
-  <div class="plus">+</div>
-  <label for="question1" class="question">Wer sind wir? </label>
-  <div class="answers"> CodeforMunich in zusammenarbeit mit dem Münchner Merkur... bla bla bla</div>
-
-</div>
-
-<div>
-
-  <input type="checkbox" id="question2" name="q" class="questions">
-
-  <div class="plus">+</div>
-  <label for="question2" class="question"> Bruttokaltmiete </label>
-  <div class="answers">
-    <p>Miete einschließlich der kalten Betriebskosten (Grundsteuer, Be- und Entwässerung, Straßenreinigung, Müllabfuhr etc.). Ist diese vereinbart, müssen Vermieter bei einer Mieterhöhung die tatsächlich in der Miete enthaltenen Betriebskosten herausrechnen, um die Miete mit den Werten im Mietspiegel vergleichbar zu machen. </p>
-  </div>
-
-</div>
-
-<div>
-
-  <input type="checkbox" id="question3" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question3" class="question">
-
-   Mietspiegel
-
-</label>
-
-  <div class="answers">
-    <p>Übersicht über die ortsübliche Vergleichsmiete, die von der Gemeinde oder den Interessenverbänden von Mieter/innen und Vermietern erstellt wird. Da nicht jede gezahlte Miete ortsüblich ist, werden durch Extremwertbereinigung und Spannenbildung die unüblichen Mieten herausgefiltert. </p>
-  </div>
-
- 
-<div>
-
-  <input type="checkbox" id="question4" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question4" class="question">
-
-   Nettokaltmiete
-
-</label>
-
-  <div class="answers">
-
-    <p>Miete ohne alle Nebenkosten für Heizung, Warmwasser, kalte Betriebskosten und ohne Zuschläge für Untermiete, Teilgewerbe oder besondere Leistungen. Der Mietspiegel bildet Nettokaltmieten ab.           </p>
-
-  </div>
-
-  
-
-<div>
-
-  <input type="checkbox" id="question5" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question5" class="question">
-
-   Rechtsgrundlagen
-
-  </label>
-
-  <div class="answers">
-
-    <div>Bürgerliches Gesetzbuch (BGB)</div>
-    <div>
-      <table border="0" bordercolor="#36577b" cellpadding="2" cellspacing="2" width="100%">
-        <tbody>
-          <tr>
-            <td><strong>Regelungen über die Miethöhe            </strong> </td>
-            <td> <strong>§</strong></td>
-          </tr>
-          <tr>
-            <td> Mieterhöhungen nach Vereinbarung oder Gesetz </td>
-            <td> 557 </td>
-          </tr>
-          <tr>
-            <td> Staffelmiete</td>
-            <td> 557a </td>
-          </tr>
-          <tr>
-            <td> Indexmiete    </td>
-            <td> 557b </td>
-          </tr>
-          <tr>
-            <td> Mieterhöhung bis zur ortsüblichen Vergleichsmiete Form und </td>
-            <td> 558 </td>
-          </tr>
-          <tr>
-            <td> Begründung der Mieterhöhung </td>
-            <td> 558a </td>
-          </tr>
-          <tr>
-            <td> Zustimmung zur Mieterhöhung </td>
-            <td> 558b</td>
-          </tr>
-          <tr>
-            <td> Mietspiegel   </td>
-            <td> 558c </td>
-          </tr>
-          <tr>
-            <td> Qualifizierter Mietspiegel </td>
-            <td> 558d</td>
-          </tr>
-          <tr>
-            <td> Mietdatenbank</td>
-            <td> 558e</td>
-          </tr>
-          <tr>
-            <td> Mieterhöhung bei Modernisierung </td>
-            <td> 559 </td>
-          </tr>
-          <tr>
-            <td> Anrechnung von Drittmitteln </td>
-            <td> 559a </td>
-          </tr>
-          <tr>
-            <td> Geltendmachung der Erhöhung, Wirkung der Erhöhungserklärung </td>
-            <td> 559b </td>
-          </tr>
-          <tr>
-            <td> Veränderungen von Betriebskosten </td>
-            <td> 560 </td>
-          </tr>
-          <tr>
-            <td> Sonderkündigungsrecht des Mieters nach Mieterhöhung    </td>
-            <td> 561</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p>&nbsp;</p> 
-
-  </div>
-
-
-
-<div>
-
-  <input type="checkbox" id="question6" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question6" class="question">
-
-   Trapattoni '98 
-
-  </label>
-
-  <div class="answers">
-
-<p>Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen.</p>
-
-<p>Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
-
-<p>Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke. Offensiv, offensiv ist wie machen wir in Platz.</p>
-
-  </div>
-
-
-
-<div>
-
-  <input type="checkbox" id="question7" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question7" class="question">
-
-   Trapattoni '98 
-
-  </label>
-
-  <div class="answers">
-
- <p>Zweitens: ich habe erklärt mit diese zwei Spieler: nach Dortmund brauchen vielleicht Halbzeit Pause.</p>
-
-<p>Ich habe auch andere Mannschaften gesehen in Europa nach diese Mittwoch. Ich habe gesehen auch zwei Tage die Training. Ein Trainer ist nicht ein Idiot! Ein Trainer sei sehen was passieren in Platz.</p>
-
-<p>In diese Spiel es waren zwei, drei diese Spieler waren schwach wie eine Flasche leer! Haben Sie gesehen Mittwoch, welche Mannschaft hat gespielt Mittwoch? Hat gespielt Mehmet oder gespielt Basler oder hat gespielt Trapattoni? Diese Spieler beklagen mehr als sie spielen!</p>
-
-  </div>
-
-
-
-<div>
-
-  <input type="checkbox" id="question8" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question8" class="question">
-
-    What are the international (“unported”) Creative Commons licenses, and why does CC offer “ported” licenses? 
-
-  </label>
-
-  <div class="answers">
-
-    <p>One of CC’s goals is ensuring that all of its legal tools work globally, so that anyone anywhere in the world can share their work on globally standard terms. To this end, CC offers a core suite of six international copyright licenses (formerly called the "unported") that are drafted based largely on various international treaties governing copyright, taking into account as many jurisdiction-specific legal issues as possible. The latest version (4.0) has been drafted with particular attention to the needs of international enforceability.
-
-
-
-For version 3.0 and earlier, Creative Commons has also offered ported versions of its six core licenses for many jurisdictions (which usually correspond to countries, but not always). These ported licenses are based on the international license suite but have been modified to reflect local nuances in the expression of legal terms and conditions, drafting protocols, and language. The ported licenses and the international licenses are all intended to be legally effective everywhere. CC expects that few, if any, ports will be necessary for 4.0.
-
-
-
-CC recommends that you take advantage of the improvements in the 4.0 suite explained on the license versions page unless there are particular considerations you are aware of that would require a ported license. </p>
-
-</div>
-
-
-
-<div>
-
-  <input type="checkbox" id="question9" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question9" class="question">
-
-   Can I include a work licensed with CC BY in a Wikipedia article even though they use a CC BY-SA license?
-
-  </label>
-
-  <div class="answers">
-
-    <p>Yes. Works licensed under CC BY may be incorporated into works that are licensed under CC BY-SA. For example, you may incorporate a CC BY photograph into a Wikipedia article so long as you keep all copyright notices intact, provide proper attribution, and otherwise comply with the terms of CC BY. Learn more about the licenses.  </p>
-
-  </div>
-
-
-
-<div>
-
-  <input type="checkbox" id="question10" name="q" class="questions">
-
-  <div class="plus">+</div>
-
-  <label for="question10" class="question">
-
-   Can governments and intergovernmental organizations ("IGOs") use CC licenses?
-
-  </label>
-
-  <div class="answers">
-
-<p>Yes, anyone may use CC licenses for material they own, including governments and IGOs, and these institutions frequently use CC licenses on their copyrightable material. The reasons for doing so vary, and often include a desire to maximize the impact and utility of works for educational and informational purposes, and to enhance transparency.
-
-
-
-Creative Commons licenses have desirable features that make them the preferred choice over custom licenses. CC licenses are standard and interoperable, which means material published by different creators using the same type of CC license can be translated, modified, compiled, and remixed without legal barriers depending on the particular license applied. Creative Commons licenses are also machine-readable, allowing CC-licensed works to be easily discovered via search engines such as Google. These features maximize distribution, reuse, and impact of works published by governments and IGOs.
-
-
-
-Though we encourage anyone to use version 4.0, which is internationally valid and may be used by individuals as well as organizations, there is an IGO ported version of 3.0 that IGOs may also use. Read more about how governments and IGOs use and leverage CC licenses and legal tools, considerations for using our licenses, and how they operate in the IGO context. </p>
-
-  </div>
-
-
-
-  </div>
-
-
-
-
-                
-                
-          </div>
+            </div>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-5">
+                        <hr class="marginbot-50">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8" style="float: none; margin: 0 auto">
+                        <div class='centerplease'>
+                            <h2>GLOSSAR</h2>
+                        </div>
+                        <br>
+                        <div>
+
+                            <input type="checkbox" id="question1" name="q" class="questions">
+
+                            <div class="plus">+</div>
+                            <label for="question1" class="question">Wer sind wir? </label>
+                            <div class="answers"> CodeforMunich in zusammenarbeit mit dem Münchner Merkur... bla bla bla</div>
+
+                        </div>
+
+                        <div>
+
+                            <input type="checkbox" id="question2" name="q" class="questions">
+
+                            <div class="plus">+</div>
+                            <label for="question2" class="question"> Bruttokaltmiete </label>
+                            <div class="answers">
+                                <p>Miete einschließlich der kalten Betriebskosten (Grundsteuer, Be- und Entwässerung, Straßenreinigung, Müllabfuhr etc.). Ist diese vereinbart, müssen Vermieter bei einer Mieterhöhung die tatsächlich in der Miete enthaltenen Betriebskosten
+                                    herausrechnen, um die Miete mit den Werten im Mietspiegel vergleichbar zu machen. </p>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <input type="checkbox" id="question3" name="q" class="questions">
+                            <div class="plus">+</div>
+                            <label for="question3" class="question">
+                                Mietspiegel
+                            </label>
+                            <div class="answers">
+                                <p>Übersicht über die ortsübliche Vergleichsmiete, die von der Gemeinde oder den Interessenverbänden von Mieter/innen und Vermietern erstellt wird. Da nicht jede gezahlte Miete ortsüblich ist, werden durch Extremwertbereinigung und
+                                    Spannenbildung die unüblichen Mieten herausgefiltert. </p>
+                            </div>
+
+
+                            <div>
+
+                                <input type="checkbox" id="question4" name="q" class="questions">
+
+                                <div class="plus">+</div>
+
+                                <label for="question4" class="question">
+
+                                    Nettokaltmiete
+
+                                </label>
+
+                                <div class="answers">
+
+                                    <p>Miete ohne alle Nebenkosten für Heizung, Warmwasser, kalte Betriebskosten und ohne Zuschläge für Untermiete, Teilgewerbe oder besondere Leistungen. Der Mietspiegel bildet Nettokaltmieten ab. </p>
+
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" id="question5" name="q" class="questions">
+                                    <div class="plus">+</div>
+                                    <label for="question5" class="question">
+                                        Rechtsgrundlagen
+                                    </label>
+                                    <div class="answers">
+                                        <div>Bürgerliches Gesetzbuch (BGB)</div>
+                                        <div>
+                                            <table border="0" bordercolor="#36577b" cellpadding="2" cellspacing="2" width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Regelungen über die Miethöhe            </strong> </td>
+                                                        <td>
+                                                            <strong>§</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Mieterhöhungen nach Vereinbarung oder Gesetz </td>
+                                                        <td> 557 </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Staffelmiete</td>
+                                                        <td> 557a </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Indexmiete    </td>
+                                                        <td> 557b </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Mieterhöhung bis zur ortsüblichen Vergleichsmiete Form und </td>
+                                                        <td> 558 </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Begründung der Mieterhöhung </td>
+                                                        <td> 558a </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Zustimmung zur Mieterhöhung </td>
+                                                        <td> 558b</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Mietspiegel   </td>
+                                                        <td> 558c </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Qualifizierter Mietspiegel </td>
+                                                        <td> 558d</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Mietdatenbank</td>
+                                                        <td> 558e</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Mieterhöhung bei Modernisierung </td>
+                                                        <td> 559 </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Anrechnung von Drittmitteln </td>
+                                                        <td> 559a </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Geltendmachung der Erhöhung, Wirkung der Erhöhungserklärung </td>
+                                                        <td> 559b </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Veränderungen von Betriebskosten </td>
+                                                        <td> 560 </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Sonderkündigungsrecht des Mieters nach Mieterhöhung    </td>
+                                                        <td> 561</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <p>&nbsp;</p>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="question6" name="q" class="questions">
+                                        <div class="plus">+</div>
+                                        <label for="question6" class="question">
+                                            Trapattoni '98
+                                        </label>
+                                        <div class="answers">
+                                            <p>Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen.</p>
+                                            <p>Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
+                                            <p>Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke. Offensiv, offensiv ist wie machen wir in Platz.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="question7" name="q" class="questions">
+                                            <div class="plus">+</div>
+                                            <label for="question7" class="question">
+                                                Trapattoni '98
+                                            </label>
+                                            <div class="answers">
+
+                                                <p>Zweitens: ich habe erklärt mit diese zwei Spieler: nach Dortmund brauchen vielleicht Halbzeit Pause.</p>
+
+                                                <p>Ich habe auch andere Mannschaften gesehen in Europa nach diese Mittwoch. Ich habe gesehen auch zwei Tage die Training. Ein Trainer ist nicht ein Idiot! Ein Trainer sei sehen was passieren in Platz.</p>
+
+                                                <p>In diese Spiel es waren zwei, drei diese Spieler waren schwach wie eine Flasche leer! Haben Sie gesehen Mittwoch, welche Mannschaft hat gespielt Mittwoch? Hat gespielt Mehmet oder gespielt Basler oder hat gespielt
+                                                    Trapattoni? Diese Spieler beklagen mehr als sie spielen!</p>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="widget-contact">
+                                            <h5>Main Office</h5>
+
+                                            <address>
+                                                <strong>Squas Design, Inc.</strong>
+                                                <br> Tower 795 Folsom Ave, Beautiful Suite 600
+                                                <br> San Francisco, CA 94107
+                                                <br>
+                                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                            </address>
+
+                                            <address>
+                                                <strong>Email</strong>
+                                                <br>
+                                                <a href="mailto:#">email.name@example.com</a>
+                                            </address>
+                                            <strong>TODO: Social Media mit Shariff</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+    
+    {% block footer %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="wow shake" data-wow-delay="0.4s">
+                        <div class="page-scroll marginbot-30">
+                            <a href="#intro" id="totop" class="btn btn-circle">
+                                <i class="fa fa-angle-double-up animated"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p>&copy;Copyright 2014 - Squad. All rights reserved.</p>
+                </div>
+            </div>
         </div>
-		
-		<div class="col-lg-4">
-			<div class="widget-contact">
-				<h5>Main Office</h5>
-				
-				<address>
-				  <strong>Squas Design, Inc.</strong><br>
-				  Tower 795 Folsom Ave, Beautiful Suite 600<br>
-				  San Francisco, CA 94107<br>
-				  <abbr title="Phone">P:</abbr> (123) 456-7890
-				</address>
-
-				<address>
-				  <strong>Email</strong><br>
-				  <a href="mailto:#">email.name@example.com</a>
-				</address>	
-				<address>
-				<strong>München, Deine Miete! In Zusammenarbeit mit:</strong><br>
-				<ul class="company-social">
-                            <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                            <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-                            <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>	
-				</address>					
-			
-			</div>	
-		</div>
-    </div>	
-
-		</div>
-	</section>
-{% endblock %}
-
-{% block footer %}
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-lg-12">
-					<div class="wow shake" data-wow-delay="0.4s">
-					<div class="page-scroll marginbot-30">
-						<a href="#intro" id="totop" class="btn btn-circle">
-							<i class="fa fa-angle-double-up animated"></i>
-						</a>
-					</div>
-					</div>
-					<p>&copy;Copyright 2014 - Squad. All rights reserved.</p>
-				</div>
-			</div>	
-		</div>
-{% endblock %}
+    {% endblock %}
