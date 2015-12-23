@@ -14,7 +14,7 @@
                 <div>
                     <p class="question-title">Kaltmiete</p>
                     <div class="input-wrapper">
-                        <input value="{{form.kaltmiete.value|default_if_none:''}}"> €</div>
+                        <input name="kaltmiete" value="{{form.kaltmiete.value|default_if_none:''}}"> €</div>
                 </div>
                 <div class="explenation">Deine Miete in ohne Nebenkosten wie Strom, Wasser, Heizung, Hausverwaltung, Garage, etc.</div>
             </div>
@@ -24,7 +24,7 @@
                     <p class="question-title">Wohnungsgröße</p>
                     <div class="input-wrapper">
                         
-                        <input value="{{form.groesse.value|default_if_none:''}}"> m²</div>
+                        <input name="groesse" value="{{form.groesse.value|default_if_none:''}}"> m²</div>
                 </div>
                 <div class="explenation">Die Größe deiner Wohnung</div>
             </div>
