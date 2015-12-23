@@ -15,7 +15,6 @@
 
 {% block content %}
     <h1>Deine Miete</h1>
-    
     <div style="max-width: 800px; margin: 0px auto">
         <form action="/" method="post">
             <div class="question">{% csrf_token %}
@@ -25,7 +24,7 @@
                         <input name="kaltmiete" value="{{form.kaltmiete.value|default_if_none:''}}"> €
                     </div>
                 </div>
-                <div class="explenation">Deine Miete in ohne Nebenkosten wie Strom, Wasser, Heizung, Hausverwaltung, Garage, etc.</div>
+                <div class="explanation">Deine Miete in ohne Nebenkosten wie Strom, Wasser, Heizung, Hausverwaltung, Garage, etc.</div>
             </div>
             <hr>
             <div class="question">
@@ -35,7 +34,7 @@
                         <input name="groesse" value="{{form.groesse.value|default_if_none:''}}"> m²
                     </div>
                 </div>
-                <div class="explenation">Die Größe deiner Wohnung</div>
+                <div class="explanation">Die Größe deiner Wohnung</div>
             </div>
             <hr>
             <div class="question">
@@ -59,7 +58,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="explenation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiedlichen Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
+                <div class="explanation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiedlichen Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
             </div>
             <hr>
             {{ form.captcha.errors }} {{ form.captcha }}
