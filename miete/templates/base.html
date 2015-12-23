@@ -17,7 +17,7 @@
     <title>{% block header_title %}{{ title }}{% endblock %}</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     {% block extra_head %}{% endblock %}
     </head>
     <body>
@@ -37,7 +37,7 @@
             {% block footer %}{% endblock %}
         </footer>
 
-        <script src="{% static 'static_jquery/js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
         {% block scripts %}{% endblock %}
     </body>
 </html>

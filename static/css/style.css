@@ -1,5 +1,5 @@
 
-/* Note: This breaks with django's nromal static-files workflow */
+/* Note: This breaks with django's normal static-files workflow */
 @font-face {
     font-family: 'Open Sans Light';
     src: url('/static/font/open-sans-light/OpenSans-Light-webfont.eot');
