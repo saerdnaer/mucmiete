@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load staticfiles %}
+{% load create_list %}
 
 {% block header_title %} Deine Miete {% endblock %}
 
@@ -15,34 +16,29 @@
 
 {% block content %}
     <h1>Deine Miete</h1>
-    
-    <div style="max-width: 800px; margin: 0px auto">
+    <div id="main-content">
+        {{ form.non_field_errors }}
         <form action="/" method="post">
-            <div class="question">{% csrf_token %}
-                <div>
-                    <p class="question-title">Kaltmiete</p>
-                    <div class="input-wrapper">
-                        <input name="kaltmiete" value="{{form.kaltmiete.value|default_if_none:''}}"> €
+            {% to_list form.groesse form.kaltmiete as entries %}
+            {% for entry in entries %}
+                <div class="question">{% csrf_token %}
+                    <div>
+                        {{entry.errors}}
+                        <p class="question-title">{{entry.label}}</p>
+                        <div class="input-wrapper">
+                            <input name="{{entry.name}}" value="{{entry.value|default_if_none:''}}"> €
+                        </div>
                     </div>
+                    <div class="explenation">{{entry.help_text}}</div>
                 </div>
-                <div class="explenation">Deine Miete in ohne Nebenkosten wie Strom, Wasser, Heizung, Hausverwaltung, Garage, etc.</div>
-            </div>
-            <hr>
-            <div class="question">
-                <div style="width: 100%">
-                    <p class="question-title">Wohnungsgröße</p>
-                    <div class="input-wrapper">
-                        <input name="groesse" value="{{form.groesse.value|default_if_none:''}}"> m²
-                    </div>
-                </div>
-                <div class="explenation">Die Größe deiner Wohnung</div>
-            </div>
-            <hr>
+                <hr>
+            {% endfor %}
             <div class="question">
                 <div>
-                    <p class="question-title">Postleitzahl</p>
+                    {{form.plz.errors}}
+                    <p class="question-title">{{form.plz.label}}</p>
                     <div class="input-wrapper">
-                        <select name="plz" value="{{form.plz.value|default_if_none:''}}">
+                        <select name="{{form.plz.name}}" value="{{form.plz.value|default_if_none:''}}">
                         {% for plz in postleitzahl %}
                             <option value="{{ plz }}">{{ plz }}</option>
                         {% endfor %}
@@ -50,21 +46,24 @@
                     </div>
                 </div>
                 <div>
-                    <p class="question-title">Stadtbezirk</p>
+                    {{form.stadtbezirk.errors}}
+                    <p class="question-title">{{form.stadtbezirk.label}}</p>
                     <div class="input-wrapper">
-                        <select name="stadtteil" value="{{form.stadtteil.value|default_if_none:''}}">
-                        {% for stadtteil in stadtteile %}
-                            <option value="{{ stadtteil }}">{{ stadtteil }}</option>
+                        <select name="{{form.stadtbezirk.name}}" value="{{form.stadtbezirk.value|default_if_none:''}}">
+                        {% for stadtbezirk in stadtbezirke %}
+                            <option value="{{ stadtbezirk }}">{{ stadtbezirk }}</option>
                         {% endfor %}
                         </select>
                     </div>
                 </div>
-                <div class="explenation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiedlichen Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
+                <div class="explenation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiede zwischen den Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
             </div>
             <hr>
-            {{ form.captcha.errors }} {{ form.captcha }}
-
-            <input type="submit" value="Absenden"/>
+            
+            <div>
+                <div id="captcha">{{ form.captcha.errors }} {{ form.captcha }}</div>
+                <div id="submit"><input type="submit" value="Absenden"/></div>
+            </div>
         </form>
     </div>
 {% endblock %}

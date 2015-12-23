@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('kaltmiete', models.PositiveSmallIntegerField(verbose_name='Kaltmiete')),
                 ('groesse', models.DecimalField(decimal_places=2, verbose_name='Größe', max_digits=6)),
                 ('plz', models.PositiveSmallIntegerField(verbose_name='Postleitzahl')),
-                ('stadtteil', models.CharField(verbose_name='Stadtteil', max_length=30)),
+                ('stadtbezirk', models.CharField(verbose_name='stadtbezirk', max_length=30)),
                 ('added', models.DateTimeField(auto_now_add=True, verbose_name='hinzugefügt')),
                 ('bewohner', models.PositiveSmallIntegerField(null=True, verbose_name='Bewohner', blank=True)),
                 ('abschluss', models.PositiveSmallIntegerField(null=True, verbose_name='Jahr des Abschlusses des Mietvertrags', blank=True)),

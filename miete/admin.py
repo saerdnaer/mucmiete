@@ -21,10 +21,10 @@ main.register(User, UserAdmin)
 
 class MieteAdmin(admin.ModelAdmin):
     readonly_fields = ('added',)
-    search_fields = ('plz', 'stadtteil')
+    search_fields = ('plz', 'stadtbezirk')
     fieldsets = (
         ('Pflicht', {
-         'fields': ('kaltmiete', 'groesse', 'plz', 'stadtteil', 'added')}),
+         'fields': ('kaltmiete', 'groesse', 'plz', 'stadtbezirk', 'added')}),
         ('Optional', {
          'fields': ('bewohner', 'abschluss', 'erhoehung', 'vermieter')}),
         ('Temporär', {'fields': ('ipaddress',)}),
