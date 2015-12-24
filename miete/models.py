@@ -43,3 +43,11 @@ class Miete(models.Model):
 class Email(models.Model):
     email = models.EmailField(
         'E-Mail für Benachrichtigung über Ergebnis', unique=True)
+
+def clean_unique_ips(age=7):
+    "remove all unique IP addresses older than 'age' days"
+    from django.utils.timezone import now
+    from datetime import timedelta
+    cutoff = now.date() - timedelta(days=age)
+    query = Miete.objects.values('ipaddress','added').annotate(count=models.Count('ipaddress')).order_by()
+    query.filter(count==1, added_lt=cutoff).delete()
