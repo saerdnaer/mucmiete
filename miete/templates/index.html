@@ -20,9 +20,10 @@
 {% block content %}
     {{ form.non_field_errors }}
     <form action="/" method="post">
+        {% csrf_token %}
         {% to_list form.groesse form.kaltmiete as entries %}
         {% for entry in entries %}
-            <div class="question">{% csrf_token %}
+            <div class="question">
                 <div>
                     {{entry.errors}}
                     <p class="question-title">{{entry.label}}</p>
@@ -35,28 +36,22 @@
             <hr>
         {% endfor %}
         <div class="question">
-            <div>
-                {{form.plz.errors}}
-                <p class="question-title">{{form.plz.label}}</p>
-                <div class="input-wrapper">
-                    <select name="{{form.plz.name}}" value="{{form.plz.value|default_if_none:''}}">
-                    {% for plz in postleitzahl %}
-                        <option value="{{ plz }}">{{ plz }}</option>
-                    {% endfor %}
-                </select>
-                </div>
-            </div>
-            <div>
-                {{form.stadtbezirk.errors}}
-                <p class="question-title">{{form.stadtbezirk.label}}</p>
-                <div class="input-wrapper">
-                    <select name="{{form.stadtbezirk.name}}" value="{{form.stadtbezirk.value|default_if_none:''}}">
-                    {% for stadtbezirk in stadtbezirke %}
-                        <option value="{{ stadtbezirk }}">{{ stadtbezirk }}</option>
-                    {% endfor %}
+            {% to_list form.plz postleitzahlen as plz_list %}
+            {% to_list form.stadtbezirk stadtbezirke as stadtbezirk_list %}
+            {% to_list plz_list stadtbezirk_list as entries %}
+            {% for entry in entries %}
+                <div>
+                    {{entry.0.errors}}
+                    <p class="question-title">{{entry.0.label}}</p>
+                    <div class="input-wrapper">
+                        <select name="{{entry.0.name}}" value="{{entry.0.value|default_if_none:''}}">
+                        {% for option in entry.1 %}
+                            <option value="{{ option }}">{{ option }}</option>
+                        {% endfor %}
                     </select>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
             <div class="explanation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiede zwischen den Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
         </div>
         <hr>
