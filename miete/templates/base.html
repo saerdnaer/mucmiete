@@ -2,8 +2,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html class="no-js">
-    <!--<![endif]-->
+<html>
     <head>
         <meta charset="utf-8"/>
         <title>{% block header_title %}{{ title }}{% endblock %}</title>
@@ -15,14 +14,10 @@
     </head>
     <body>
         <div id="wrapper">
-            <!--[if lt IE 7]>
-            <p class="browsehappy">{% blocktrans with link="http://browsehappy.com/" %}You are using an <strong>outdated</strong> browser. Please <a href="{{link}}">upgrade your browser</a> to improve your experience.{% endblocktrans %}</p>
-            <![endif]-->
-            
             <header>
                 {% block header %}{% endblock %}
             </header>
-
+            
             <nav>
                 {% block navigation %}{% endblock %}
             </nav>
@@ -30,10 +25,15 @@
             <div id="main-content">
                 {% block content %}{% endblock %}
             </div>
-
+            
             <footer>
-                <div style="float: left">Über Uns</div>
-                <div style="float: right">Impressum, Datenschutz, GitHub</div>
+                <div style="float: left">
+                    <a href="{% url 'about' %}">Über uns</a>
+                </div>
+                <div style="float: right">
+                    <a href="{% url 'datenschutz' %}">Datenschutz</a>,
+                    <a href="{% url 'impressum' %}">Impressum</a>
+                </div>
             </footer>
         </div>
 
