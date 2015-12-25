@@ -6,7 +6,7 @@
 {% block header_title %} Deine Miete {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/form.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 {%endblock %}
 
 {% block scripts %}
@@ -18,6 +18,26 @@
 {% endblock %}
 
 {% block content %}
+
+    <p style="text-align: center; font-size: 30px; color: grey">[Video]</p>
+
+    <h2>Wer wir sind</h2>
+    <ul id="partners">
+        <li>
+            <div><img src="{% static 'img/logo-code-for-muenchen.svg' %}" alt="Logo Code for München"></div>
+            <div>Code for München</div>
+        </li>
+        <li>
+            <div><img src="{% static 'img/logo-merkur-de.jpg' %}" alt="Logo des Münchner Merkur"></div>
+            <div>Münchner Merkur</div>
+        </li>
+        <li>
+            <div><img src="{% static 'img/logo-tz-de.jpg' %}" alt="Logo der TZ"></div>
+            <div>TZ</div>
+        </li>
+    </ul>
+
+    <h2>Die Umfrage</h2>
     {{ form.non_field_errors }}
     <form action="/" method="post">
         {% csrf_token %}
