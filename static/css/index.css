@@ -1,3 +1,33 @@
+ul#partners {
+    list-style: none;
+}
+
+ul#partners > li {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+}
+
+ul#partners > li > div {
+    margin: 5px;
+}
+
+ul#partners > li > div > img {
+    width: 80%;
+}
+
+@media (max-width: 850px) {
+    ul#partners > li {
+        width: 32%;
+    }
+}
+
+@media (max-width: 600px) {
+    ul#partners > li > div > img {
+        width: 90%
+    }
+}
+
 #all-questions {
     max-width: 600px;
     margin: 0 auto;
@@ -6,7 +36,6 @@
 hr {
     margin: 10px 0;
     background-color: red;
-    margin-right: 25px; /** makes the line end where the input field ends */
 }
 
 .question {
@@ -22,17 +51,15 @@ hr {
 
 .question-title {
     display: inline-block;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 400;
     float: left;
 }
 
 .input-wrapper {
-    width: 205px; /* vertically aligns the input fields. sass/less variables might be a better solution */
     float: right;
-    margin-top: 10px; /* TODO: clean solution that also works with different font size */
-
 }
+
 .input-wrapper > input,  .input-wrapper > select {
     height: 25px;
     width: 175px;
@@ -50,10 +77,19 @@ hr {
 
 #submit {
     float: right;
-    width: 205px;
 }
 
 #submit > input {
     width: 180px;
     height: 50px;
+}
+
+form#Umfrage {
+    padding-right: 20px;
+}
+
+#unit {
+    display: inline-block;
+    position: absolute;
+    margin-left: 5px;
 }
