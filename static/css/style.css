@@ -18,9 +18,43 @@
     font-weight: 300;
 }
 
-#main-content {
+html, body {
+    height: 100%;
+}
+
+body {
+    marign
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
     max-width: 800px;
-    margin: 0px auto;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+@media (max-width: 480px) {
+    #wrapper {
+        padding: 0 5px;
+    }
+}
+
+#main-content {
+    padding-bottom: 30px;
+    overflow: hidden;
+}
+
+footer {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+footer > div > a {
+    margin: 5px;
 }
 
 p, div {
@@ -29,66 +63,9 @@ p, div {
 
 h1 {
     text-align: center;
-    margin: 20px 0px;
+    padding: 20px 0px;
 }
 
-#all-questions {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* For the questions */
-hr {
-    margin: 10px 0;
-    background-color: red;
-    margin-right: 25px; /** makes the line end where the input field ends */
-}
-
-.question {
-    display: inline-block;
-    width: 100%;
-    margin: 0px 0;
-}
-
-.question > div {
-    clear: both;
-    padding: 10px 0;
-}
-
-.question-title {
-    display: inline-block;
-    font-size: 28px;
-    font-weight: 400;
-    float: left;
-}
-
-.input-wrapper {
-    width: 205px; /* vertically aligns the input fields. sass/less variables might be a better solution */
-    float: right;
-    margin-top: 10px; /* TODO: clean solution that also works with different font size */
-
-}
-.input-wrapper > input,  .input-wrapper > select {
-    height: 25px;
-    width: 175px;
-    background: white;
-    border: 1px solid grey;
-}
-
-.explanation {
-    color: #333;
-}
-
-#captcha {
-    float: left;
-}
-
-#submit {
-    float: right;
-    width: 205px;
-}
-
-#submit > input {
-    width: 180px;
-    height: 50px;
+a {
+    text-decoration: none;
 }
