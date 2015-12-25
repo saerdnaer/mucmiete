@@ -1,5 +1,7 @@
 from django.shortcuts import render
+
 from ipware.ip import get_ip
+
 from .forms import MieteForm
 from .models import Email
 
