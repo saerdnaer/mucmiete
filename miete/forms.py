@@ -16,7 +16,7 @@ class MieteFormPlicht(ModelForm):
             'plz': 'Deine Postleitzahl',
             'stadtbezirk': 'Der stadtbezirk in dem du wohnst.',
         }
-    #captcha = ReCaptchaField(attrs={'theme': 'clean'})
+    captcha = ReCaptchaField(attrs={'theme': 'clean'})
 
 
 class MieteFormOptional(ModelForm):
