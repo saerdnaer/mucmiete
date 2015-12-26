@@ -39,7 +39,7 @@
 
     <h2>Die Umfrage</h2>
     {{ form.non_field_errors }}
-    <form action="/" method="post">
+    <form id="Umfrage" action="/" method="post">
         {% csrf_token %}
         {% to_list form.groesse form.kaltmiete as entries %}
         {% for entry in entries %}
@@ -48,7 +48,7 @@
                     {{entry.errors}}
                     <p class="question-title">{{entry.label}}</p>
                     <div class="input-wrapper">
-                        <input name="{{entry.name}}" value="{{entry.value|default_if_none:''}}"> €
+                        <input name="{{entry.name}}" value="{{entry.value|default_if_none:''}}"><div id="unit">{% cycle " m²" " €" %}</div>
                     </div>
                 </div>
                 <div class="explanation">{{entry.help_text}}</div>
@@ -56,16 +56,15 @@
             <hr>
         {% endfor %}
         <div class="question">
-            {% to_list form.plz postleitzahlen as plz_list %}
-            {% to_list form.stadtbezirk stadtbezirke as stadtbezirk_list %}
-            {% to_list plz_list stadtbezirk_list as entries %}
+            {% to_list form.plz form.stadtbezirk as entries %}
             {% for entry in entries %}
                 <div>
-                    {{entry.0.errors}}
-                    <p class="question-title">{{entry.0.label}}</p>
+                    {{entry.errors}}
+                    <p class="question-title">{{entry.label}}</p>
                     <div class="input-wrapper">
-                        <select name="{{entry.0.name}}" value="{{entry.0.value|default_if_none:''}}">
-                        {% for option in entry.1 %}
+                        <select name="{{entry.name}}" value="{{entry.value|default_if_none:''}}">
+                        {% cycle postleitzahlen stadtbezirke as optionen %}
+                        {% for option in optionen %}
                             <option value="{{ option }}">{{ option }}</option>
                         {% endfor %}
                     </select>

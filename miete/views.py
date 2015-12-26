@@ -21,9 +21,8 @@ def index_view(request, **kwargs):
                 Email.objects.get_or_create(email=email)
             # redirect to a new URL:
             return render(request, 'thanks.html')
-    
-    # if a GET (or any other method) we'll create a blank form
-    form = MieteForm()
+    else:
+        form = MieteForm()
     
     # TODO: store both lists in the database
     stadtbezirke   = ["Allach", "Untermenzing", "Altstadt", "Lehel", "Au", "Haidhausen", "Aubing", "Lochhausen", "Langwied", "Berg am Laim", "Bogenhausen", "Feldmoching", "Hasenbergl", "Hadern", "Laim", "Ludwigsvorstadt", "Isarvorstadt", "Maxvorstadt", "Milbertshofen", "Am Hart", "Moosach", "Neuhausen", "Nymphenburg", "Obergiesing", "Pasing", "Obermenzing", "Ramersdorf", "Perlach", "Schwabing", "Freimann", "Schwabing-West", "Schwanthalerhöhe", "Sendling", "Sendling-Westpark", "Thalkirchen", "Obersendling", "Fürstenried", "Forstenried", "Solln", "Trudering", "Riem", "Untergiesing", "Harlaching"]
