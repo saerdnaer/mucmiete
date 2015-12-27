@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block header_title %} Danke für deine Teilnahme! {% endblock %}
+
+{% block header %}
+<h1>Vielen Dank für deine Teilnahme!</h1>
+{% endblock %}
+
+{% block content %}
+<p>[Irgendetwas, das zeigt, dass wir es wirklich toll finden, dass jemand bei der Umfrage mitgemacht hat]</p>
+<p><a href="{% url 'index' %}">[icon arrow left] Zurück zu Startseite</a></p>
+{% endblock %}

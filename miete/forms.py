@@ -14,7 +14,7 @@ class MieteFormPlicht(ModelForm):
             'kaltmiete': 'Deine Miete ohne Nebenkosten wie Strom, Wasser, Heizung, Hausverwaltung, Garage, etc.',
             'groesse': 'Die Wohnungsgröße in Quadratmetern wie sie im Mietvertrag festgelegt wurde.',
             'plz': 'Deine Postleitzahl',
-            'stadtbezirk': 'Der stadtbezirk in dem du wohnst.',
+            'stadtbezirk': 'Der Stadtbezirk in dem du wohnst.',
         }
     captcha = ReCaptchaField(attrs={'theme': 'clean'})
 
