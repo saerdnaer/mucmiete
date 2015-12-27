@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% load create_list %}
+{% load to_list %}
 
 {% block header_title %} Deine Miete {% endblock %}
 
@@ -9,16 +9,11 @@
 <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 {%endblock %}
 
-{% block scripts %}
-<!--script src="{% static 'js/custom.js' %}"></script-->
-{% endblock %}
-
 {% block header %}
 <h1>Deine Miete</h1>
 {% endblock %}
 
 {% block content %}
-
     <p style="text-align: center; font-size: 30px; color: grey">[Video]</p>
 
     <h2>Wer wir sind</h2>
@@ -38,9 +33,11 @@
     </ul>
 
     <h2>Die Umfrage</h2>
-    {{ form.non_field_errors }}
-    <form id="Umfrage" action="/" method="post">
+    <form id="Umfrage" action="" method="post">
         {% csrf_token %}
+        {{ wizard.management_form }} {# This is important for the wizard to work #}
+        {{ form.non_field_errors }}
+        
         {% to_list form.groesse form.kaltmiete as entries %}
         {% for entry in entries %}
             <div class="question">
@@ -48,13 +45,14 @@
                     {{entry.errors}}
                     <p class="question-title">{{entry.label}}</p>
                     <div class="input-wrapper">
-                        <input name="{{entry.name}}" value="{{entry.value|default_if_none:''}}"><div id="unit">{% cycle " m²" " €" %}</div>
+                        <input name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}"><div id="unit">{% cycle " m²" " €" %}</div>
                     </div>
                 </div>
                 <div class="explanation">{{entry.help_text}}</div>
             </div>
             <hr>
         {% endfor %}
+        
         <div class="question">
             {% to_list form.plz form.stadtbezirk as entries %}
             {% for entry in entries %}
@@ -62,8 +60,8 @@
                     {{entry.errors}}
                     <p class="question-title">{{entry.label}}</p>
                     <div class="input-wrapper">
-                        <select name="{{entry.name}}" value="{{entry.value|default_if_none:''}}">
-                        {% cycle postleitzahlen stadtbezirke as optionen %}
+                        <select name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required>
+                        {% cycle postleitzahlen stadtbezirke as optionen silent %}
                         {% for option in optionen %}
                             <option value="{{ option }}">{{ option }}</option>
                         {% endfor %}
@@ -73,6 +71,7 @@
             {% endfor %}
             <div class="explanation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiede zwischen den Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
         </div>
+        
         <hr>
         
         <div>

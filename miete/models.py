@@ -35,10 +35,6 @@ class Miete(models.Model):
     ipaddress = models.GenericIPAddressField(
         'IP Adresse', blank=True, null=True)
 
-    def __str__(self):
-        return "%i für %f in %i %s" % (self.kaltmiete, self.groesse, self.plz, self.stadtbezirk)
-    __unicode__ = __str__  # python2
-
 
 class Email(models.Model):
     email = models.EmailField(

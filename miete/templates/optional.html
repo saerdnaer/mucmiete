@@ -1,28 +1,42 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load staticfiles %}
+{% load to_list %}
 
-{% block head %}
-{{ wizard.form.media }}
+{% block header_title %} Deine Miete {% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+{%endblock %}
+
+{% block header %}
+<h1>Vielen Dank für deine Teilnahme!</h1>
+<p style="text-align: center; font-size: 20px; margin-bottom: 40px;">Hast du Lust, noch vier weitere Fragen zu beantworten?<br>
+    Das sind die Letzten, versprochen.</p>
 {% endblock %}
 
 {% block content %}
-<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-<form action="" method="post">{% csrf_token %}
-<table>
-{{ wizard.management_form }}
-{% if wizard.form.forms %}
-    {{ wizard.form.management_form }}
-    {% for form in wizard.form.forms %}
-        {{ form }}
+<form id="Umfrage" action="" method="post">
+    {% csrf_token %}
+    {{ wizard.management_form }} {# This is important for the wizard to work #}
+    {{ form.non_field_errors }}
+    
+    {% for entry in form %}
+        <div class="question">
+            <div>
+                {{entry.errors}}
+                <p class="question-title">{{entry.label}}</p>
+                <div class="input-wrapper">
+                    {{ entry }}
+                </div>
+            </div>
+            <div class="explanation">{{entry.help_text}}</div>
+        </div>
+        <hr>
     {% endfor %}
-{% else %}
-    {{ wizard.form }}
-{% endif %}
-</table>
-{% if wizard.steps.prev %}
-<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
-{% endif %}
-<input type="submit" value="{% trans "submit" %}"/>
+    
+    <div>
+        <div id="submit"><input type="submit" value="Absenden"/></div>
+    </div>
 </form>
 {% endblock %}
