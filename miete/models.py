@@ -18,7 +18,7 @@ class Miete(models.Model):
         verbose_name_plural = 'Mieten'
     kaltmiete = models.PositiveSmallIntegerField('Kaltmiete')
     groesse = models.DecimalField('Größe', max_digits=6, decimal_places=2)
-    plz = models.PositiveSmallIntegerField('Postleitzahl')
+    plz = models.PositiveIntegerField('Postleitzahl')
     stadtbezirk = models.CharField('stadtbezirk', max_length=30)
     # hidden
     added = models.DateTimeField('hinzugefügt', auto_now_add=True,)
@@ -34,10 +34,6 @@ class Miete(models.Model):
     # hidden
     ipaddress = models.GenericIPAddressField(
         'IP Adresse', blank=True, null=True)
-
-    def __str__(self):
-        return "%i für %f in %i %s" % (self.kaltmiete, self.groesse, self.plz, self.stadtbezirk)
-    __unicode__ = __str__  # python2
 
 
 class Email(models.Model):
