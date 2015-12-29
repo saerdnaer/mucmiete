@@ -15,6 +15,8 @@ DATABASES = {
     }
 }
 
+USE_CAPTACHA = False
+
 # support proxy for debugging
 # in nginx set:
 # proxy_set_header X-Forwarded-Proto $scheme;

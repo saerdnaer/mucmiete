@@ -2,11 +2,18 @@
 
 from __future__ import unicode_literals
 from django.forms import ModelForm, HiddenInput, EmailField
+from django.conf import settings
 from captcha.fields import ReCaptchaField
 from .models import Miete
 
 
 class MieteFormPlicht(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MieteFormPlicht, self).__init__(*args, **kwargs)
+        
+        if settings.USE_CAPTACHA:
+            captcha = ReCaptchaField(attrs={'theme': 'clean'})
+    
     class Meta:
         model = Miete
         fields = ('kaltmiete', 'groesse', 'plz', 'stadtbezirk')
@@ -16,7 +23,7 @@ class MieteFormPlicht(ModelForm):
             'plz': 'Deine Postleitzahl',
             'stadtbezirk': 'Der Stadtbezirk in dem du wohnst.',
         }
-    captcha = ReCaptchaField(attrs={'theme': 'clean'})
+    
 
 
 class MieteFormOptional(ModelForm):

@@ -6,6 +6,7 @@ RECAPTCHA_PRIVATE_KEY = ''
 
 # Other settings
 HAVE_ADMIN = True
+USE_CAPTACHA = True
 STATIC_ROOT = '/var/www/deine-miete-static/'
 
 # Database
