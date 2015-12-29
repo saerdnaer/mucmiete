@@ -20,7 +20,7 @@ class Umfrage(SessionWizardView):
     def get_template_names(self):
         templates = ["index.html", "optional.html"]
         return [templates[int(self.steps.current)]]
-    
+        
     def save_model(self):
         """
         Custom method for saving the Model after every step
@@ -35,6 +35,7 @@ class Umfrage(SessionWizardView):
             self.save_model()
             
         form = form or self.get_form()
+        
         context = self.get_context_data(form=form, **kwargs)
         
         # TODO: store both lists in the database
@@ -49,7 +50,5 @@ class Umfrage(SessionWizardView):
 
 # TODO
 """
-            email = form.cleaned_data['email']
-            if email:
-                Email.objects.get_or_create(email=email)
+
 """
