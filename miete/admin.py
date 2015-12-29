@@ -34,5 +34,3 @@ class MieteAdmin(admin.ModelAdmin):
     date_hierarchy = 'added'
 
 main.register(models.Miete, MieteAdmin)
-
-main.register(models.Email)
