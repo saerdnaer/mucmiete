@@ -7,10 +7,10 @@ from .models import Miete
 from formtools.wizard.views import SessionWizardView
 
 class Umfrage(SessionWizardView):
-    instance = Miete()
     """
     Does some magic that allows splitting a model-form into different pages by giving every ModelForm the same instance of the Model
     """
+    instance = Miete()
     def dispatch(self, request, *args, **kwargs):
         return super(Umfrage, self).dispatch(request, *args, **kwargs)
         
@@ -47,8 +47,3 @@ class Umfrage(SessionWizardView):
     def done(self, form_list, **kwargs):
         self.save_model()
         return render_to_response('done.html')
-
-# TODO
-"""
-
-"""
