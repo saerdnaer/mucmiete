@@ -26,10 +26,10 @@ class MieteAdmin(admin.ModelAdmin):
         ('Pflicht', {
          'fields': ('kaltmiete', 'groesse', 'plz', 'stadtbezirk', 'added')}),
         ('Optional', {
-         'fields': ('bewohner', 'abschluss', 'erhoehung', 'vermieter')}),
+         'fields': ('bewohner', 'abschluss', 'erhoehung', 'vermieter' 'email')}),
         ('Temporär', {'fields': ('ipaddress',)}),
     )
-    list_display = ('kaltmiete', 'groesse', 'plz')
+    list_display = ('kaltmiete', 'groesse', 'plz', 'bewohner', 'abschluss', 'erhoehung', 'vermieter', 'email')
     list_filter = ('plz',)
     date_hierarchy = 'added'
 

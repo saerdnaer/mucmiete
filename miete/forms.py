@@ -29,13 +29,11 @@ class MieteFormPlicht(ModelForm):
 class MieteFormOptional(ModelForm):
     class Meta:
         model = Miete
-        fields = ('bewohner', 'abschluss', 'erhoehung', 'vermieter')
+        fields = ('bewohner', 'abschluss', 'erhoehung', 'vermieter', 'email')
         help_texts = {
             'bewohner': 'Die Anzahl aller Bewohner in der Wohnung',
             'abschluss': 'Das Jahr des Abschlusses des Mietvertrags',
             'erhoehung': 'Das Jahr der letzten Mieterhöhung',
             'vermieter': 'Die Art des Vermieters',
+            'email': 'Trage deine E-Mailadresse hier ein, wenn Du über das Ergebnis der Umfrage benachrichtigt werden willst'
         }
-    
-    email = EmailField(required=False, label='E-Mail',
-                       help_text='Trage deine E-Mailadresse hier ein, wenn Du über das Ergebnis der Umfrage benachrichtigt werden willst')
