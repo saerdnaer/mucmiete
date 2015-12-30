@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block body-content %}
+<div id="wrapper">
+    {# This uses content-embed if it exists and otherwise falls back to content #}
+    {% block content-embed %}{% block content %}{% endblock %}{% endblock %}
+</div>
+{% endblock %}

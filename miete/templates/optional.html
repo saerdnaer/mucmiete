@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends is_embeded|yesno:"embed.html,standalone.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load to_list %}
