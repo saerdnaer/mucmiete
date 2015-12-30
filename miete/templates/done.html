@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends is_embeded|yesno:"embed.html,standalone.html" %}
 {% load i18n %}
 {% load staticfiles %}
 
@@ -8,7 +8,13 @@
 <h1>Vielen Dank für deine Teilnahme!</h1>
 {% endblock %}
 
-{% block content %}
+{% block content-standalone %}
 <p>[Irgendetwas, das zeigt, dass wir es wirklich toll finden, dass jemand bei der Umfrage mitgemacht hat]</p>
 <p><a href="{% url 'index' %}">[icon arrow left] Zurück zu Startseite</a></p>
+{% endblock %}
+
+{% block content-embed %}
+<h1>Vielen Dank für deine Teilnahme!</h1>
+
+<p>[Irgendetwas, das zeigt, dass wir es wirklich toll finden, dass jemand bei der Umfrage mitgemacht hat]</p>
 {% endblock %}

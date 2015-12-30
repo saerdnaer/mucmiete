@@ -13,31 +13,8 @@
         {% block extra_head %}{% endblock %}
     </head>
     <body>
-        <div id="wrapper">
-            <header>
-                {% block header %}{% endblock %}
-            </header>
-            
-            <nav>
-                {% block navigation %}{% endblock %}
-            </nav>
-            
-            <div id="main-content">
-                {% block content %}{% endblock %}
-            </div>
-            
-            <footer>
-                <div id="footer-left">
-                    <a href="{% url 'about' %}">Über uns</a>
-                </div>
-                <div id="footer-right">
-                    <a href="{% url 'datenschutz' %}">Datenschutz</a>
-                    <a href="{% url 'impressum' %}">Impressum</a>
-                </div>
-            </footer>
-        </div>
+        {% block body-content %}{% endblock %}
 
-        <script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
         {% block scripts %}{% endblock %}
     </body>
 </html>
