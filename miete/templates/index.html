@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends is_embeded|yesno:"embed.html,standalone.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load to_list %}
@@ -13,7 +13,7 @@
 <h1>Deine Miete</h1>
 {% endblock %}
 
-{% block content %}
+{% block content-standalone %}
     <p style="text-align: center; font-size: 30px; color: grey">[Video]</p>
 
     <h2>Wer wir sind</h2>
@@ -33,50 +33,10 @@
     </ul>
 
     <h2>Die Umfrage</h2>
-    <form id="Umfrage" action="" method="post">
-        {% csrf_token %}
-        {{ wizard.management_form }} {# This is important for the wizard to work #}
-        {{ form.non_field_errors }}
-        
-        {% to_list form.groesse form.kaltmiete as entries %}
-        {% for entry in entries %}
-            <div class="question">
-                <div>
-                    {{entry.errors}}
-                    <p class="question-title">{{entry.label}}</p>
-                    <div class="input-wrapper">
-                        <input name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}"><div id="unit">{% cycle " m²" " €" %}</div>
-                    </div>
-                </div>
-                <div class="explanation">{{entry.help_text}}</div>
-            </div>
-            <hr>
-        {% endfor %}
-        
-        <div class="question">
-            {% to_list form.plz form.stadtbezirk as entries %}
-            {% for entry in entries %}
-                <div>
-                    {{entry.errors}}
-                    <p class="question-title">{{entry.label}}</p>
-                    <div class="input-wrapper">
-                        <select name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required>
-                        {% cycle postleitzahlen stadtbezirke as optionen silent %}
-                        {% for option in optionen %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                    </div>
-                </div>
-            {% endfor %}
-            <div class="explanation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiede zwischen den Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
-        </div>
-        
-        <hr>
-        
-        <div>
-            <div id="captcha">{{ form.captcha.errors }} {{ form.captcha }}</div>
-            <div id="submit"><input type="submit" value="Absenden"/></div>
-        </div>
-    </form>
+    {% include "index_form.html" %}
+{% endblock %}
+
+{% block content-embed %}
+    {% include "index_form.html" %}
+    <a href="{% url 'datenschutz' %}">Datenschutz</a>
 {% endblock %}
