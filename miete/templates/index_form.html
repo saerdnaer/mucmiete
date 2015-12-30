@@ -27,7 +27,7 @@
                 {{entry.errors}}
                 <p class="question-title">{{entry.label}}</p>
                 <div class="input-wrapper">
-                    <select name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required>
+                <select name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required>
                     {% cycle postleitzahlen stadtbezirke as optionen silent %}
                     {% for option in optionen %}
                         <option value="{{ option }}">{{ option }}</option>
