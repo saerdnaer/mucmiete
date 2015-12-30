@@ -40,3 +40,8 @@
     {% include "index_form.html" %}
     <a href="{% url 'datenschutz' %}">Datenschutz</a>
 {% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'js/stadtbezirke-plz.js' %}"></script>
+{%endblock %}
