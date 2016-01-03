@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Determines which Stadtbezirksteile in munich intersect with which postal codes and returns them as csv
+Determines which Stadtbezirksteile in munich intersect with which postal codes and writes them to file that can be imported in the django settings
 
 Requirements:
  - python 3.3+
@@ -71,13 +71,6 @@ def get_intersections(plz, bezirksteile):
                 intersections.append([plz_name, bezirksteil_name, percentage])
 
     return intersections
-
-def write_to_csv(intersections):
-    with open('plz-bezirksteile.csv', 'wt', encoding='utf-8') as csvfile:
-        w = csv.writer(csvfile)
-        w.writerow(['plz', 'abdeckung', 'bezirksteil'])
-        for plz, bezirksteil, percentage in intersections:
-            w.writerow([plz, "{0:.6f}".format(percentage), bezirksteil])
 
 def write_to_python_file(intersections, plz, bezirksteile, filename):
     mapping = defaultdict(list)
