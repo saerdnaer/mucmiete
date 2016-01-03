@@ -63,3 +63,8 @@ static.deploy
 # Bower
 static/js/jquery
 
+# plz-mapping
+bezirksteile-plz.geojson
+bezirksteile-plz.osm
+settings/plz_mapping.py
+node_modules

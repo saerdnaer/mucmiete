@@ -8,12 +8,6 @@ from .models import Miete
 
 
 class MieteFormPlicht(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(MieteFormPlicht, self).__init__(*args, **kwargs)
-        
-        if settings.USE_CAPTACHA:
-            captcha = ReCaptchaField(attrs={'theme': 'clean'})
-    
     class Meta:
         model = Miete
         fields = ('kaltmiete', 'groesse', 'plz', 'stadtbezirk')
@@ -24,7 +18,8 @@ class MieteFormPlicht(ModelForm):
             'stadtbezirk': 'Der Stadtbezirk in dem du wohnst.',
         }
     
-
+    if settings.USE_CAPTCHA:
+        captcha = ReCaptchaField(attrs={'theme': 'clean'})
 
 class MieteFormOptional(ModelForm):
     class Meta:

@@ -18,6 +18,7 @@ bower install
 virtualenv -p python3 env
 source env/bin/activate
 pip install -r requirements.txt
+./manage.py create_plz_mapping
 ./manage.py migrate
 ```
 
