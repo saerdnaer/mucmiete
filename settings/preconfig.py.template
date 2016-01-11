@@ -8,6 +8,7 @@ RECAPTCHA_PRIVATE_KEY = ''
 HAVE_ADMIN = True
 USE_CAPTACHA = True
 STATIC_ROOT = '/var/www/deine-miete-static/'
+CSRF_TRUSTED_ORIGINS = ['deine-miete.de'] # Needed for uwsgi
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
