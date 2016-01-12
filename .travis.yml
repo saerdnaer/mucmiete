@@ -1,0 +1,19 @@
+language: python
+
+python:
+  - "3.5"
+
+install:
+  - sudo apt-get install libgeos-dev
+  - npm install osmtogeojson
+  - "pip install -r requirements.txt"
+
+before-script:
+  - cp settings/preconfig.py.template settings/preconfig.py
+  - ./manage.py create_plz_mapping
+
+script:
+  - ./manage.py check
+
+after-script:
+  - ./require-clean-working-tree.sh
