@@ -1,5 +1,7 @@
 # Deine Miete
 
+[![Build Status](https://travis-ci.org/konstin/mucmiete.svg?branch=master)](https://travis-ci.org/konstin/mucmiete)
+
 [TODO: Description of the project]
 
 ## Prerequisites
