@@ -6,9 +6,9 @@ python:
 install:
   - sudo apt-get install libgeos-dev
   - npm install osmtogeojson
-  - "pip install -r requirements.txt"
+  - pip install -r requirements.txt
 
-before-script:
+before_script:
   - cp settings/preconfig.py.template settings/preconfig.py
   - ./manage.py create_plz_mapping
 
