@@ -9,7 +9,7 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  - cp settings/preconfig.py.template settings/preconfig.py
+  - cp settings/preconfig-travis.py.template settings/preconfig.py
   - ./manage.py create_plz_mapping
 
 script:
