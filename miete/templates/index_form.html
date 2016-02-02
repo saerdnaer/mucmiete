@@ -12,7 +12,7 @@
                 {{entry.errors}}
                 <p class="question-title">{{entry.label}}</p>
                 <div class="input-wrapper">
-                    <input name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}"><div id="unit">{% cycle " m²" " €" %}</div>
+                    <input name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required><div id="unit">{% cycle " m²" " €" %}</div>
                 </div>
             </div>
             <div class="explanation">{{entry.help_text}}</div>
@@ -28,6 +28,7 @@
                 <p class="question-title">{{entry.label}}</p>
                 <div class="input-wrapper">
                 <select name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required>
+                    <option disabled selected></option>
                     {% cycle postleitzahlen stadtbezirke as optionen silent %}
                     {% for option in optionen %}
                         <option value="{{ option }}">{{ option }}</option>
