@@ -3,7 +3,7 @@ from django.conf import settings
 
 from ipware.ip import get_ip
 
-from .models import Miete
+from .models import Miete, Email
 
 from formtools.wizard.views import SessionWizardView
 
@@ -26,6 +26,12 @@ class Umfrage(SessionWizardView):
         """
         Custom method for saving the Model after every step
         """
+        
+        print(self.request.POST)
+        if "1-email" in self.request.POST:
+            print("YEP")
+            Email.objects.get_or_create(addresse=self.request.POST["1-email"])
+        
         # Create some friendly server logs
         self.instance.ipaddress = get_ip(self.request)
         self.instance.save()
@@ -39,7 +45,6 @@ class Umfrage(SessionWizardView):
         
         context = self.get_context_data(form=form, **kwargs)
         
-        # TODO: store both lists in the database
         context["stadtbezirke"]   = settings.BEZIRKSTEILE
         context["postleitzahlen"] = settings.PLZ
         context["mapping"]        = settings.PLZ_MAPPING
