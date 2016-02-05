@@ -31,11 +31,12 @@ class Miete(models.Model):
         'Jahr der letzten Mieterhöhung', null=True, blank=True)
     vermieter = models.CharField(
         verbose_name='Vermieter', max_length=2, choices=VERMIETER_CHOICES, blank=True)
-    email = models.EmailField(
-        'E-Mail für Benachrichtigung über Ergebnis', blank=True)
     # hidden
     ipaddress = models.GenericIPAddressField(
         'IP Adresse', blank=True, null=True)
+
+class Email(models.Model):
+    addresse = models.EmailField('E-Mail für Benachrichtigung über Ergebnis', blank=True)
 
 def clean_unique_ips(age=7):
     "remove all unique IP addresses older than 'age' days"
