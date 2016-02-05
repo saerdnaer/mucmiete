@@ -27,9 +27,7 @@ class Umfrage(SessionWizardView):
         Custom method for saving the Model after every step
         """
         
-        print(self.request.POST)
         if "1-email" in self.request.POST:
-            print("YEP")
             Email.objects.get_or_create(addresse=self.request.POST["1-email"])
         
         # Create some friendly server logs

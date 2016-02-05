@@ -9,6 +9,7 @@ HAVE_ADMIN = True
 USE_CAPTCHA = True
 STATIC_ROOT = '/var/www/deine-miete-static/'
 CSRF_TRUSTED_ORIGINS = ['deine-miete.de'] # Needed for uwsgi
+ALLOWED_HOSTS = ['127.0.0.1', '::1']
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
