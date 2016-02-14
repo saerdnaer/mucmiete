@@ -1,0 +1,53 @@
+{% extends is_embedded|yesno:"embed.html,standalone.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load to_list %}
+
+{% block header_title %} Deine Miete {% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+{%endblock %}
+
+{% block header %}
+<h1>Vielen Dank für deine Teilnahme!</h1>
+<p style="text-align: center; font-size: 20px; margin-bottom: 40px;">Hast du Lust, noch vier weitere Fragen zu beantworten?<br>
+    Das sind die Letzten, versprochen.</p>
+{% endblock %}
+
+{% block content %}
+<form id="Umfrage" action="" method="post">
+    {% csrf_token %}
+    {{ wizard.management_form }} {# This is important for the wizard to work #}
+    {{ form.non_field_errors }}
+    
+    {% for entry in form %}
+        <div class="question">
+            <div>
+                {{entry.errors}}
+                <p class="question-title">{{entry.label}}</p>
+                <div class="input-wrapper">
+                    {{ entry }}
+                </div>
+            </div>
+            <div class="explanation">{{entry.help_text}}</div>
+        </div>
+        <hr>
+    {% endfor %}
+    
+    <div class="question">
+        <div>
+            <p class="question-title">email</p>
+            <div class="input-wrapper">
+                <input id="id_1-email" maxlength="254" name="1-email" type="email">
+            </div>
+        </div>
+        <div class="explanation">Trage deine E-Mailadresse hier ein, wenn Du über das Ergebnis der Umfrage benachrichtigt werden wills'</div>
+    </div>
+    <hr>
+    
+    <div>
+        <div id="submit"><input type="submit" value="Absenden"/></div>
+    </div>
+</form>
+{% endblock %}

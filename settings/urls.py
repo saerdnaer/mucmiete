@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.conf import settings
-from miete.views import index_view
+from django.views.generic import TemplateView
+
+from miete.views import Umfrage
+from miete.forms import MieteFormPlicht, MieteFormOptional
 
 urlpatterns = [
-    url(r'^$', index_view, name='index'),
+    url(r'^$', Umfrage.as_view([MieteFormPlicht, MieteFormOptional]), name="index"),
+    url(r'^about/?$', TemplateView.as_view(template_name="about.html"), name="about"),
+    url(r'^datenschutz/?$', TemplateView.as_view(template_name="datenschutz.html"), name="datenschutz"),
+    url(r'^impressum/?$', TemplateView.as_view(template_name="impressum.html"), name="impressum"),
 ]
+
 if settings.HAVE_ADMIN:
     from django.contrib import admin
     from django.contrib.auth import views as auth_views

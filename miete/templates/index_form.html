@@ -1,0 +1,49 @@
+{% load to_list %}
+
+<form id="Umfrage" action="" method="post">
+    {% csrf_token %}
+    {{ wizard.management_form }} {# This is important for the wizard to work #}
+    {{ form.non_field_errors }}
+    
+    {% to_list form.groesse form.kaltmiete as entries %}
+    {% for entry in entries %}
+        <div class="question">
+            <div>
+                {{entry.errors}}
+                <p class="question-title">{{entry.label}}</p>
+                <div class="input-wrapper">
+                    <input name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required><div id="unit">{% cycle " m²" " €" %}</div>
+                </div>
+            </div>
+            <div class="explanation">{{entry.help_text}}</div>
+        </div>
+        <hr>
+    {% endfor %}
+    
+    <div class="question">
+        {% to_list form.plz form.stadtbezirk as entries %}
+        {% for entry in entries %}
+            <div>
+                {{entry.errors}}
+                <p class="question-title">{{entry.label}}</p>
+                <div class="input-wrapper">
+                <select name="{{entry.html_name}}" value="{{entry.value|default_if_none:''}}" required>
+                    <option disabled selected></option>
+                    {% cycle postleitzahlen stadtbezirke as optionen silent %}
+                    {% for option in optionen %}
+                        <option value="{{ option }}">{{ option }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="explanation">Wir benötigen deine Postleitzahl und deinen Stadtbezirk, um die unterschiede zwischen den Mieten in den verschiedenen Teilen Münchens erfassen zu können</div>
+    </div>
+    
+    <hr>
+    
+    <div>
+        <div id="captcha">{{ form.captcha.errors }} {{ form.captcha }}</div>
+        <div id="submit"><input type="submit" value="Absenden"/></div>
+    </div>
+</form>

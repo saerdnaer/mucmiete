@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block body-content %}
+<div id="wrapper">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    
+    <nav>
+        {% block navigation %}{% endblock %}
+    </nav>
+    
+    <div id="main-content">
+        {# This uses content-standalone if it exists and otherwise falls back to content #}
+        {% block content-standalone %}{% block content %}{% endblock %}{% endblock %}
+    </div>
+    
+    <footer>
+        <div id="footer-left">
+            <a href="{% url 'about' %}">Über uns</a>
+        </div>
+        <div id="footer-right">
+            <a href="{% url 'datenschutz' %}">Datenschutz</a>
+            <a href="{% url 'impressum' %}">Impressum</a>
+        </div>
+    </footer>
+</div>
+
+<script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
+{% endblock %}

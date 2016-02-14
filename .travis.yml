@@ -1,0 +1,30 @@
+language: python
+sudo: false
+
+python:
+  - "3.5"
+
+addons:
+  apt:
+    packages:
+    - libgeos-dev
+
+cache:
+  apt: true
+  pip: true
+  directories:
+    - node_modules
+
+install:
+  - npm install osmtogeojson
+  - pip install -r requirements.txt
+
+before_script:
+  - cp settings/preconfig-travis.py.template settings/preconfig.py
+  - ./manage.py create_plz_mapping
+
+script:
+  - ./manage.py check
+
+after-script:
+  - ./require-clean-working-tree.sh

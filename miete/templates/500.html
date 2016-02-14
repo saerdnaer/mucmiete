@@ -1,6 +1,9 @@
-{% extends "base.html" %}{% load i18n %}
-{% block header_title %}{% trans '500 - Internal server error' %}{% endblock %}{% block content %}
-<h1>{% trans 'Error' %}
-</h1>
-<p>{% trans 'There was an internal error when processing your request. The administrators have been notified.' %}
-</p>{% endblock %}
+{% extends "standalone.html" %}
+{% load i18n %}
+
+{% block header_title %}{% trans '500 - Internal server error' %}{% endblock %}
+
+{% block content %}
+<h1>{% trans 'Error' %}</h1>
+<p>{% trans 'There was an internal error when processing your request. The administrators have been notified.' %}</p>
+{% endblock %}

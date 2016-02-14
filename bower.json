@@ -1,0 +1,6 @@
+{
+  "name": "Deine Miete",
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}

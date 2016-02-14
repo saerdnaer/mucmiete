@@ -21,18 +21,16 @@ main.register(User, UserAdmin)
 
 class MieteAdmin(admin.ModelAdmin):
     readonly_fields = ('added',)
-    search_fields = ('plz', 'stadtteil')
+    search_fields = ('plz', 'stadtbezirk')
     fieldsets = (
         ('Pflicht', {
-         'fields': ('kaltmiete', 'groesse', 'plz', 'stadtteil', 'added')}),
+         'fields': ('kaltmiete', 'groesse', 'plz', 'stadtbezirk', 'added')}),
         ('Optional', {
          'fields': ('bewohner', 'abschluss', 'erhoehung', 'vermieter')}),
         ('Temporär', {'fields': ('ipaddress',)}),
     )
-    list_display = ('kaltmiete', 'groesse', 'plz')
+    list_display = ('kaltmiete', 'groesse', 'plz', 'bewohner', 'abschluss', 'erhoehung', 'vermieter')
     list_filter = ('plz',)
     date_hierarchy = 'added'
 
 main.register(models.Miete, MieteAdmin)
-
-main.register(models.Email)

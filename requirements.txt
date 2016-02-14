@@ -1,6 +1,5 @@
-#six>=1.8
 pytz
-django>=1.8
+django==1.8
 django-extensions>=1.4.7
 django-recaptcha
 django-bootstrap3
@@ -8,6 +7,5 @@ django-fontawesome
 django-static-jquery>=2.1.4
 django_admin_bootstrapped>=2.4
 django-ipware
-#djangorestframework>=3.1
-#django-cors-headers
-#unicodecsv
+django-formtools>=1.0
+shapely>=1.5

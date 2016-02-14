@@ -59,3 +59,12 @@ target/
 db.sqlite3
 settings/preconfig.py
 static.deploy
+
+# Bower
+static/js/jquery
+
+# plz-mapping
+bezirksteile-plz.geojson
+bezirksteile-plz.osm
+settings/plz_mapping.py
+node_modules
