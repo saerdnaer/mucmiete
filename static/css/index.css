@@ -93,3 +93,7 @@ form#Umfrage {
     position: absolute;
     margin-left: 5px;
 }
+
+#map { 
+    height: 400px; 
+}
