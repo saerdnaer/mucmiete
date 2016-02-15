@@ -54,6 +54,7 @@ $("select[name='0-plz']").change(function() {
     $el = $("select[name='0-stadtbezirk']");
     $el.empty();
     map[$(this).val()].forEach(function(stadtbezirk) {
+        $el.append($('<option value=""></option>');
         $el.append($('<option></option>').attr("value", stadtbezirk).text(stadtbezirk));
     });
 });
