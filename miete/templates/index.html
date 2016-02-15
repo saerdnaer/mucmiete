@@ -7,6 +7,7 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+<link rel="stylesheet" href="{% static 'js/leaflet/dist/leaflet.css' %}"/>
 {%endblock %}
 
 {% block header %}
@@ -43,20 +44,102 @@
 
 {% block scripts %}
 <script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'js/leaflet/dist/leaflet.js' %}"></script>
+<script src="{% static 'js/bezirksteile-plz.js' %}"></script>
 <script>
+
+var map = L.map('map', {scrollWheelZoom: false}).setView([48.1412,11.5760], 13);
+if(L.Browser.retina) var tp = "lr";
+else var tp = "ls";
+
+//L.tileLayer('http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg').addTo(map);
+//L.tileLayer('http://tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {attribution:'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'}).addTo(map);
+
+var plz_feature_map = {};
+
+var bezirksteil_feature_map = {};
+
+
+var plz_style = {"weight": 2, "opacity": 0.3};
+var bezirksteil_style = {"weight": 4, "opacity": 0.1, "dasharray": "5,5"};
+var highlight = {"weight": 8, "opacity": 0.5};
+
+var plz_layer = L.geoJson(features, {
+    onEachFeature: function(feature, layer) {
+        layer.on('click', function (e) {
+          $("select[name='0-plz']").val(feature.properties.postal_code);
+          $("select[name='0-plz']").change();
+        });
+        
+        plz_feature_map[feature.properties.postal_code] = layer;
+    },
+    style: plz_style,
+    filter: function(feature, layer) {
+        return (feature.properties.boundary == 'postal_code');
+    }
+}).addTo(map);
+
+
+var bezirksteil_layer = 0;
+var old_plz = 0;
+var plz_bezirk_map = {
+    {% for plz, bezirksteile in mapping.items %}
+        {{ plz }}: ['{{ bezirksteile | join:"', '"}}'],
+    {% endfor %}
+};
+
 $("select[name='0-plz']").change(function() {
-    map = {
-        {% for plz, stadtbezirke in mapping.items %}
-            {{ plz }}: ['{{ stadtbezirke | join:"', '"}}'],
-        {% endfor %}
-    };
     
+    var feature = plz_feature_map[$(this).val()];
+    var bezirksteile = plz_bezirk_map[$(this).val()];
+    map.fitBounds(feature);
+    
+    if (old_plz) old_plz.setStyle(plz_style);
+    feature.setStyle(highlight);
+    old_plz = feature;
+    
+    if (bezirksteil_layer) {
+        map.removeLayer(bezirksteil_layer);
+        bezirksteil_feature_map = {}
+    }
+    
+    
+    bezirksteil_layer = L.geoJson(features, {
+        onEachFeature: function(feature, layer) {
+            var bezirksteil = String(feature.properties.name).replace('Bezirksteil ','');
+            layer.on('click', function (e) {
+              $("select[name='0-stadtbezirk']").val(bezirksteil);
+              $("select[name='0-stadtbezirk']").change();
+            });
+            
+            bezirksteil_feature_map[bezirksteil] = layer;
+        }, 
+        style: bezirksteil_style,
+        filter: function(feature, layer) {
+            bezirksteil = String(feature.properties.name).replace('Bezirksteil ','');
+            return (feature.properties.admin_level == '10' && ($.inArray(bezirksteil, bezirksteile) != -1) );
+        }
+    })
+    bezirksteil_layer.addTo(map);
+
     $el = $("select[name='0-stadtbezirk']");
     $el.empty();
-    map[$(this).val()].forEach(function(stadtbezirk) {
-        $el.append($('<option value=""></option>');
-        $el.append($('<option></option>').attr("value", stadtbezirk).text(stadtbezirk));
+    $el.append($('<option value=""></option>'));
+    bezirksteile.forEach(function(bezirksteil) {
+        $el.append($('<option></option>').attr("value", bezirksteil).text(bezirksteil));
     });
 });
+
+var old_bezirksteil = 0
+
+$("select[name='0-stadtbezirk']").change(function() {
+    
+    if (old_bezirksteil) old_bezirksteil.setStyle(bezirksteil_style);
+    feature = bezirksteil_feature_map[$(this).val()];
+    feature.setStyle(highlight);
+    old_bezirksteil = feature;
+});
+
 </script>
 {%endblock %}
