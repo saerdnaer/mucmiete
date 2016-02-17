@@ -61,9 +61,9 @@ var plz_feature_map = {};
 var bezirksteil_feature_map = {};
 
 
-var plz_style = {"weight": 2, "opacity": 0.3};
-var bezirksteil_style = {"weight": 4, "opacity": 0.1, "dasharray": "5,5"};
-var highlight = {"weight": 8, "opacity": 0.5};
+var plz_style = {"weight": 2, "opacity": 0.3, "fillOpacity": 0.2};
+var bezirksteil_style = {"weight": 4, "opacity": 0.2, "fillOpacity": 0.3, "dasharray": "5,5", "color": "lightblue"};
+var highlight = {"weight": 8, "opacity": 0.5, "fillOpacity": 0.6};
 
 var plz_layer = L.geoJson(features, {
     onEachFeature: function(feature, layer) {
